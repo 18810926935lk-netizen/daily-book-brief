@@ -64,6 +64,39 @@ def fetch(url):
     txt = re.sub(r'\s+', ' ', txt)
     print(txt[:6000])
 
+def googlenews(query):
+    """谷歌新闻RSS：按查询聚合媒体报道，按时间倒序。
+    窗口：2026-09-19前抓9月1日以来（新板块首期回看），之后抓过去48小时。"""
+    from datetime import datetime, timezone, date, timedelta
+    today = datetime.now(timezone.utc)
+    if today.date() <= date(2026, 9, 19):
+        cutoff = datetime(2026, 9, 1, tzinfo=timezone.utc)
+        win = '9月1日以来'
+    else:
+        cutoff = today - timedelta(hours=48)
+        win = '过去48小时'
+    q = urllib.parse.quote(query)
+    url = (f'https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en')
+    xml = get(url).decode('utf-8', 'ignore')
+    items = []
+    for it in re.findall(r'<item>(.*?)</item>', xml, re.S):
+        t = re.search(r'<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</title>', it, re.S)
+        l = re.search(r'<link>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</link>', it, re.S)
+        d = re.search(r'<pubDate>(.*?)</pubDate>', it)
+        s = re.search(r'<source[^>]*>(.*?)</source>', it)
+        if not (t and d):
+            continue
+        try:
+            dt = email.utils.parsedate_to_datetime(d.group(1))
+        except Exception:
+            continue
+        if dt >= cutoff:
+            items.append((dt, t.group(1).strip(), (s.group(1) if s else ''), (l.group(1).strip() if l else '')))
+    items.sort(key=lambda x: -x[0].timestamp())
+    print(f'# window: {win} | items: {len(items)}')
+    for dt, title, src, link in items[:30]:
+        print(f"[{dt.strftime('%Y-%m-%d')}] {title}" + (f' ({src})' if src else '') + ' || ' + link)
+
 if __name__ == '__main__':
     import urllib.parse
     cmd = sys.argv[1] if len(sys.argv) > 1 else ''
@@ -75,5 +108,7 @@ if __name__ == '__main__':
         wikipedia(sys.argv[2])
     elif cmd == 'fetch':
         fetch(sys.argv[2])
+    elif cmd == 'googlenews':
+        googlenews(' '.join(sys.argv[2:]))
     else:
         print(__doc__)
