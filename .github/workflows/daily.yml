@@ -43,7 +43,9 @@ jobs:
         run: python gen_brief.py
 
       - name: docx
-        run: python make_docx.py "site/content_${SITE_DATE}.json" "site/${SITE_DATE}.docx"
+        run: |
+          D=$(date +%F)
+          python make_docx.py "site/content_${D}.json" "site/${D}.docx"
         env:
           TZ: Asia/Shanghai
 
@@ -59,7 +61,7 @@ jobs:
           git config user.name "brief-bot"
           git config user.email "brief-bot@users.noreply.github.com"
           git add site/ data/ || true
-          git commit -m "brief ${SITE_DATE}" || echo "nothing to commit"
+          git commit -m "brief $(date +%F)" || echo "nothing to commit"
           git push
         env:
           TZ: Asia/Shanghai
