@@ -1,0 +1,65 @@
+name: daily-brief
+on:
+  schedule:
+    - cron: '25 22 * * *'   # UTC 22:25 = 北京时间 06:25
+  workflow_dispatch: {}       # 支持手动触发测试
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: deps
+        run: pip install python-docx requests
+
+      - name: collect
+        env:
+          TZ: Asia/Shanghai
+        run: |
+          mkdir -p data site
+          python collect.py lithub > data/lithub.txt 2>/dev/null || echo COLLECT_LITHUB_FAILED > data/lithub.txt
+          python collect.py podcasts "The Daily" "Crime Junkie" "The Rest Is History" > data/podcasts.txt 2>/dev/null || echo COLLECT_PODCASTS_FAILED > data/podcasts.txt
+          python collect.py wikipedia "List_of_The_New_York_Times_number-one_books_of_2026" > data/wikipedia.txt 2>/dev/null || echo COLLECT_WIKI_FAILED > data/wikipedia.txt
+          echo "collected:"; wc -c data/*.txt
+
+      - name: generate
+        env:
+          GLM_BASE_URL: ${{ secrets.GLM_BASE_URL }}
+          GLM_TOKEN: ${{ secrets.GLM_TOKEN }}
+          TZ: Asia/Shanghai
+        run: python gen_brief.py
+
+      - name: docx
+        run: python make_docx.py "site/content_${SITE_DATE}.json" "site/${SITE_DATE}.docx"
+        env:
+          TZ: Asia/Shanghai
+
+      - name: notify
+        env:
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
+          SITE_BASE: ${{ vars.SITE_BASE }}
+          TZ: Asia/Shanghai
+        run: python notify.py
+
+      - name: publish
+        run: |
+          git config user.name "brief-bot"
+          git config user.email "brief-bot@users.noreply.github.com"
+          git add site/ data/ || true
+          git commit -m "brief ${SITE_DATE}" || echo "nothing to commit"
+          git push
+        env:
+          TZ: Asia/Shanghai
