@@ -33,6 +33,8 @@ jobs:
           python collect.py lithub > data/lithub.txt 2>/dev/null || echo COLLECT_LITHUB_FAILED > data/lithub.txt
           python collect.py podcasts "The Daily" "Crime Junkie" "The Rest Is History" > data/podcasts.txt 2>/dev/null || echo COLLECT_PODCASTS_FAILED > data/podcasts.txt
           python collect.py wikipedia "List_of_The_New_York_Times_number-one_books_of_2026" > data/wikipedia.txt 2>/dev/null || echo COLLECT_WIKI_FAILED > data/wikipedia.txt
+          python collect.py googlenews "Nobel Prize in Literature 2026 prediction OR odds OR favorite OR contender" > data/nobel_lit.txt 2>/dev/null || echo NOBEL_LIT_FAILED > data/nobel_lit.txt
+          python collect.py googlenews "Nobel memorial prize in economics 2026 prediction OR favorite OR frontrunner" > data/nobel_econ.txt 2>/dev/null || echo NOBEL_ECON_FAILED > data/nobel_econ.txt
           echo "collected:"; wc -c data/*.txt
 
       - name: generate
