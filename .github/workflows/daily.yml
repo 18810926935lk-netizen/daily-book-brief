@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
 
       - name: deps
-        run: pip install python-docx requests
+        run: pip install htmldocx requests
 
       - name: collect
         env:
@@ -45,7 +45,7 @@ jobs:
       - name: docx
         run: |
           D=$(date +%F)
-          python make_docx.py "site/content_${D}.json" "site/${D}.docx"
+          python make_docx.py "site/${D}.html" "site/${D}.docx" || echo "WARN: docx failed, continue"
         env:
           TZ: Asia/Shanghai
 
