@@ -29,6 +29,12 @@ prompt = f"""今天是{TODAY}。以下是今日采集的数据：
 ===== NYT 榜首书维基表（交叉验证，可能滞后到上月末）=====
 {read('data/wikipedia.txt')}
 
+===== 诺奖文学奖预测（谷歌新闻聚合，注意文件头标注的时间窗口）=====
+{read('data/nobel_lit.txt', 10000)}
+
+===== 诺奖经济学奖预测（谷歌新闻聚合）=====
+{read('data/nobel_econ.txt', 8000)}
+
 ===== 格式模板 sample.html（结构与内联样式照抄，内容全部替换为今日）=====
 {read('template/sample.html')}
 
