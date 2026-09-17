@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""调 GLM（Anthropic 兼容端点）生成今日简报 HTML + content.json
+"""调 GLM（Anthropic 兼容端点）生成今日简报 HTML
 输入: data/lithub.txt, data/podcasts.txt, data/wikipedia.txt, template/sample.html
-输出: site/{today}.html, site/content_{today}.json, site/index.html
+输出: site/{today}.html, site/index.html
 """
-import os, re, json, sys
+import os, re, sys
 from datetime import datetime, timezone, timedelta
 
 CST = timezone(timedelta(hours=8))
@@ -32,22 +32,27 @@ prompt = f"""今天是{TODAY}。以下是今日采集的数据：
 ===== 格式模板 sample.html（结构与内联样式照抄，内容全部替换为今日）=====
 {read('template/sample.html')}
 
-按系统提示词的规范与输出格式，生成今日简报。记住：数据里没有的不要编，播客必须是单集，文章必须带 lithub.txt 里的真实链接。"""
+按系统提示词的规范，输出今日简报的完整 HTML（```html 代码块）。只输出这一个代码块。"""
 
 sys_prompt = open(os.path.join(BASE, 'PROMPT.md'), encoding='utf-8').read()
+# 输出格式段落动态替换：只要 HTML
+sys_prompt = sys_prompt.split('## 输出格式')[0] + """
+## 输出格式（严格遵守）
 
-# ---- 调用 GLM Anthropic 兼容端点 ----
+只输出一个 ```html 代码块，即完整的今日简报 HTML 文件。不要输出其他内容。
+"""
+
 import requests
 base = os.environ['GLM_BASE_URL'].rstrip('/')
 token = os.environ['GLM_TOKEN']
-r = requests.post(base + '/v1/messages', timeout=1200, headers={
+r = requests.post(base + '/v1/messages', timeout=1800, headers={
     'x-api-key': token,
     'authorization': 'Bearer ' + token,
     'anthropic-version': '2023-06-01',
     'content-type': 'application/json',
 }, json={
     'model': 'GLM-5.3',
-    'max_tokens': 16000,
+    'max_tokens': 32000,
     'system': sys_prompt,
     'messages': [{'role': 'user', 'content': prompt}],
 })
@@ -56,38 +61,25 @@ data = r.json()
 if data.get('type') == 'error':
     raise SystemExit('API error: ' + json.dumps(data.get('error', {}), ensure_ascii=False)[:500])
 text = ''.join(b.get('text', '') for b in data.get('content', []))
-print('API usage:', data.get('usage'), 'output chars:', len(text))
+print('API usage:', data.get('usage'), 'stop:', data.get('stop_reason'), 'output chars:', len(text))
 
-# ---- 解析两个代码块 ----
-html_m = re.search(r'```html\s*(.*?)\s*```', text, re.S)
-json_m = re.search(r'```json\s*(.*?)\s*```', text, re.S)
-if not html_m:
-    # 兜底：找 <!DOCTYPE 开头的整段
-    html_m = re.search(r'(<!DOCTYPE html.*)', text, re.S)
-if not html_m:
+m = re.search(r'```html\s*(.*?)\s*```', text, re.S) or re.search(r'(<!DOCTYPE html.*)', text, re.S)
+if not m:
     raise SystemExit('OUTPUT_NO_HTML\n' + text[:800])
+html = m.group(1).strip()
 
-html = html_m.group(1)
+if '</html>' not in html:
+    raise SystemExit('HTML_TRUNCATED (no </html>) len=' + str(len(html)))
+
 open(os.path.join(BASE, 'site', f'{TODAY}.html'), 'w', encoding='utf-8').write(html)
 
-if json_m:
-    try:
-        cj = json.loads(json_m.group(1))
-        open(os.path.join(BASE, 'site', f'content_{TODAY}.json'), 'w', encoding='utf-8').write(
-            json.dumps(cj, ensure_ascii=False, indent=1))
-    except Exception as e:
-        print('WARN: content.json parse failed:', e)
-else:
-    print('WARN: no content.json block')
-
-# ---- index.html：最新一期落地页 ----
 issue = ''
-m = re.search(r'第(\d+)期', html)
-if m:
-    issue = m.group(1)
+m2 = re.search(r'第(\d+)期', html)
+if m2:
+    issue = m2.group(1)
 index = f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>图书信息简报</title><meta http-equiv="refresh" content="0; url={TODAY}.html">
 </head><body><p>最新一期：{TODAY}（第{issue or '?'}期），<a href="{TODAY}.html">点此阅读</a></p></body></html>"""
 open(os.path.join(BASE, 'site', 'index.html'), 'w', encoding='utf-8').write(index)
-print('GENERATED:', TODAY, 'issue', issue)
+print('GENERATED:', TODAY, 'issue', issue, 'len', len(html))
