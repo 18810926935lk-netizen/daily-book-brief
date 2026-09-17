@@ -36,7 +36,7 @@ jobs:
           python collect.py googlenews "Nobel Prize in Literature 2026 prediction OR odds OR favorite OR contender" > data/nobel_lit.txt 2>/dev/null || echo NOBEL_LIT_FAILED > data/nobel_lit.txt
           python collect.py googlenews "Nobel memorial prize in economics 2026 prediction OR favorite OR frontrunner" > data/nobel_econ.txt 2>/dev/null || echo NOBEL_ECON_FAILED > data/nobel_econ.txt
           python collect.py googlenews "literary fiction books authors prize award" > data/fallback_lit.txt 2>/dev/null || echo FALLBACK_LIT_FAILED > data/fallback_lit.txt
-          python collect.py googlenews "economics books authors ideas policy" > data/fallback_econ.txt 2>/dev/null || echo FALLBACK_ECON_FAILED > data/fallback_econ.txt
+          python collect.py googlenews "\"economics book\" 2026" > data/fallback_econ.txt 2>/dev/null || echo FALLBACK_ECON_FAILED > data/fallback_econ.txt
           python collect.py googlenews "\"Book Deals\" Publishers Weekly" > data/rights.txt 2>/dev/null || echo RIGHTS_FAILED > data/rights.txt
           python collect.py googlenews "publishing rights deal book auction" >> data/rights.txt 2>/dev/null || true
           echo "collected:"; wc -c data/*.txt
