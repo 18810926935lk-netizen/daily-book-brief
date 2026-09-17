@@ -35,6 +35,15 @@ prompt = f"""今天是{TODAY}。以下是今日采集的数据：
 ===== 诺奖经济学奖预测（谷歌新闻聚合）=====
 {read('data/nobel_econ.txt', 8000)}
 
+===== 文学圈近期报道（仅当文学奖小节无新预测时选读一篇）=====
+{read('data/fallback_lit.txt', 6000)}
+
+===== 经济学圈近期报道（仅当经济学奖小节无新预测时选读一篇）=====
+{read('data/fallback_econ.txt', 6000)}
+
+===== 国际版权贸易报道（rights/交易/拍卖）=====
+{read('data/rights.txt', 10000)}
+
 ===== 格式模板 sample.html（结构与内联样式照抄，内容全部替换为今日）=====
 {read('template/sample.html')}
 
