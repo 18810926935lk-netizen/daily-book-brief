@@ -3,7 +3,7 @@
 输入: data/lithub.txt, data/podcasts.txt, data/wikipedia.txt, template/sample.html
 输出: site/{today}.html, site/index.html
 """
-import os, re, sys
+import os, re, sys, json
 from datetime import datetime, timezone, timedelta
 
 CST = timezone(timedelta(hours=8))
@@ -23,11 +23,11 @@ prompt = f"""今天是{TODAY}。以下是今日采集的数据：
 ===== Lit Hub 当日热文（标题 || 链接）=====
 {read('data/lithub.txt')}
 
-===== 播客榜单头部节目最近单集（RSS核实）=====
+===== 播客榜单头部节目最近单集（RSS核实，节目池：The Daily/Crime Junkie/The Rest Is History/SmartLess/The Mel Robbins Podcast/Stuff You Should Know）=====
 {read('data/podcasts.txt')}
 
-===== NYT 榜首书维基表（交叉验证，可能滞后到上月末）=====
-{read('data/wikipedia.txt')}
+===== NYT 榜首书维基表（全年各榜榜首汇总，交叉验证，可能滞后到上月末）=====
+{read('data/wikipedia.txt', 40000)}
 
 ===== 诺奖文学奖预测（谷歌新闻聚合，注意文件头标注的时间窗口）=====
 {read('data/nobel_lit.txt', 10000)}
@@ -60,17 +60,25 @@ sys_prompt = sys_prompt.split('## 输出格式')[0] + """
 import requests
 base = os.environ['GLM_BASE_URL'].rstrip('/')
 token = os.environ['GLM_TOKEN']
-r = requests.post(base + '/v1/messages', timeout=1800, headers={
-    'x-api-key': token,
-    'authorization': 'Bearer ' + token,
-    'anthropic-version': '2023-06-01',
-    'content-type': 'application/json',
-}, json={
-    'model': 'GLM-5.3',
-    'max_tokens': 32000,
-    'system': sys_prompt,
-    'messages': [{'role': 'user', 'content': prompt}],
-})
+
+# 30条条目+选题板块输出量大：优先 65536；端点若不接受则回退 32768
+r = None
+for mt in (65536, 32768):
+    r = requests.post(base + '/v1/messages', timeout=1800, headers={
+        'x-api-key': token,
+        'authorization': 'Bearer ' + token,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+    }, json={
+        'model': 'GLM-5.3',
+        'max_tokens': mt,
+        'system': sys_prompt,
+        'messages': [{'role': 'user', 'content': prompt}],
+    })
+    if r.status_code == 400 and 'max_tokens' in r.text:
+        print(f'max_tokens={mt} rejected, falling back...')
+        continue
+    break
 r.raise_for_status()
 data = r.json()
 if data.get('type') == 'error':
