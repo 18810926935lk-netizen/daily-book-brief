@@ -3,7 +3,7 @@
 用法:
   python collect.py lithub                     # Lit Hub 当日首页文章+链接
   python collect.py podcasts "节目名" "节目名" # 各节目RSS最近3集
-  python collect.py wikipedia <页面名>          # 维基wikitext(截2万字符)
+  python collect.py wikipedia <页面名> [上限]   # 维基wikitext(默认截4万字符)
   python collect.py fetch <url>                # 抓任意网页转纯文本(截6千字符)
 """
 import sys, re, json, urllib.request, email.utils
@@ -51,11 +51,11 @@ def podcasts(names):
         except Exception as e:
             print(f'== {name} | ERR {e}')
 
-def wikipedia(page):
+def wikipedia(page, cap=40000):
     url = ('https://en.wikipedia.org/w/api.php?action=parse&page='
            + urllib.parse.quote(page) + '&format=json&prop=wikitext')
     wt = json.loads(get(url).decode('utf-8'))['parse']['wikitext']['*']
-    print(wt[:20000])
+    print(wt[:cap])
 
 def fetch(url):
     h = get(url).decode('utf-8', 'ignore')
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     elif cmd == 'podcasts':
         podcasts(sys.argv[2:])
     elif cmd == 'wikipedia':
-        wikipedia(sys.argv[2])
+        wikipedia(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 40000)
     elif cmd == 'fetch':
         fetch(sys.argv[2])
     elif cmd == 'googlenews':
