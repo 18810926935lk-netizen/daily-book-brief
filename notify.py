@@ -22,7 +22,7 @@ plain = re.sub(r'\s+', ' ', plain)
 issue = (re.search(r'第(\d+)期', plain) or [None, '?'])[1]
 title = f'📖 图书信息简报 {TODAY}（第{issue}期）'
 
-heads = re.findall(r'[一二三四]、[^ ]{2,20}', plain)[:6]
+heads = re.findall(r'[一二三四五六七八]、[^ ]{2,20}', plain)[:7]
 url = f'{site_base}/{TODAY}.html' if site_base else '(SITE_BASE 未配置)'
 
 desp = f"""**今日简报已生成** [点此阅读全文]({url})
