@@ -1,1 +1,1 @@
-# window: 9月1日以来 | items: 0
+# window: 过去48小时 | items: 0

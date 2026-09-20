@@ -1,4 +1,2 @@
-# window: 9月1日以来 | items: 2
-[2026-09-15] Religion Book Deals: September 16, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMiwwFBVV95cUxOcjdQNmdvZXlUalRGcWhtRC10Y3ZjRm5HbW1DVFlkMXZnNFVnQjBLdE9WbE5OWTE5NkFjUGp0bVJ5RWtKeHNoTjM3cmt3WWx3S0U3YVZucVpJeXNWSFVhNEZUOUpTSmZXVWFJRktvdUlscXQtX2Y3U1FQNWZCcXlxNDRRS0ljNjdTY2g1ZmZISkdrM3RhQzRycWwtWVUzVXhWTHJaYWJNMHFzTW9fMVFMSGNuV0xRYVVjaWRNbElFdnlkWFU?oc=5
-[2026-09-11] Book Deals: Week of September 14, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMixAFBVV95cUxNbTd1YXBVM3RKcDAwdS0xNDNvMHU5NDF3RWZnLS10UENZc1pDWE1EWGF0TnpIQ3FZQk1qTUQ4bmpXWWRwaG1LMnpLZnZ4eUY3UGNoNVdaWWhESFluWDVDRXF3YU1lbkhnXzZRTmJ6VkdNNEZxOGhpaThnU2xwVDVhNVBtbTUxdVpPOXhwMTZmc3FNMV9kOU95Y21yYjd1cjJ1b21JdFpYQWM3M2w4bkUtc21tMVJsWlJfOWw0SXp6OUpwS25X?oc=5
-# window: 9月1日以来 | items: 0
+# window: 过去48小时 | items: 0
+# window: 过去48小时 | items: 0
