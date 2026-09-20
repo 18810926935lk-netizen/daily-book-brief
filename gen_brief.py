@@ -57,28 +57,46 @@ sys_prompt = sys_prompt.split('## 输出格式')[0] + """
 只输出一个 ```html 代码块，即完整的今日简报 HTML 文件。不要输出其他内容。
 """
 
+import time
 import requests
+from requests.exceptions import ConnectionError as ReqConnErr, Timeout
+
 base = os.environ['GLM_BASE_URL'].rstrip('/')
 token = os.environ['GLM_TOKEN']
 
+def call(mt):
+    # 网络抖动/服务端错误重试：最多5次线性退避，避免单次断连导致当日断更（2026-09-19教训）
+    last = 'no attempt'
+    for attempt in range(1, 6):
+        try:
+            r = requests.post(base + '/v1/messages', timeout=1800, headers={
+                'x-api-key': token,
+                'authorization': 'Bearer ' + token,
+                'anthropic-version': '2023-06-01',
+                'content-type': 'application/json',
+            }, json={
+                'model': 'GLM-5.3',
+                'max_tokens': mt,
+                'system': sys_prompt,
+                'messages': [{'role': 'user', 'content': prompt}],
+            })
+            if r.status_code < 500 and r.status_code != 429:
+                return r
+            last = f'HTTP {r.status_code}'
+        except (ReqConnErr, Timeout) as e:
+            last = f'{type(e).__name__}: {str(e)[:200]}'
+        if attempt < 5:
+            print(f'attempt {attempt} failed ({last}), retry in {30 * attempt}s')
+            time.sleep(30 * attempt)
+        else:
+            print(f'attempt {attempt} failed ({last}), giving up')
+    raise SystemExit(f'API_UNREACHABLE after 5 attempts, last: {last}')
+
 # 30条条目+选题板块输出量大：优先 65536；端点若不接受则回退 32768
-r = None
-for mt in (65536, 32768):
-    r = requests.post(base + '/v1/messages', timeout=1800, headers={
-        'x-api-key': token,
-        'authorization': 'Bearer ' + token,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-    }, json={
-        'model': 'GLM-5.3',
-        'max_tokens': mt,
-        'system': sys_prompt,
-        'messages': [{'role': 'user', 'content': prompt}],
-    })
-    if r.status_code == 400 and 'max_tokens' in r.text:
-        print(f'max_tokens={mt} rejected, falling back...')
-        continue
-    break
+r = call(65536)
+if r.status_code == 400 and 'max_tokens' in r.text:
+    print('max_tokens=65536 rejected, falling back to 32768...')
+    r = call(32768)
 r.raise_for_status()
 data = r.json()
 if data.get('type') == 'error':
