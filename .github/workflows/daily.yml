@@ -71,3 +71,14 @@ jobs:
           git push
         env:
           TZ: Asia/Shanghai
+
+      # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
+      - name: notify-failure
+        if: failure()
+        env:
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
+          TZ: Asia/Shanghai
+        run: |
+          curl -s -X POST "https://sctapi.ftqq.com/${SERVERCHAN_KEY}.send" \
+            -d "title=图书简报管道异常 $(date +%F)" \
+            -d "desp=当日简报生成失败，今日微信无日报，请查看日志：https://github.com/18810926935lk-netizen/daily-book-brief/actions"
