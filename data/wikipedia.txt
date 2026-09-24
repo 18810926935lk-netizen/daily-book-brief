@@ -184,12 +184,36 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/08/23/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=August 23, 2026|access-date=August 19, 2026}}</ref>
 |-
 !scope="row"|{{dts|August 30}}
-|rowspan="1"|''[[Theo of Golden]]''
-|rowspan="1"|[[Allen Levi]]
-|rowspan="1"|[[Atria Books]]
+|rowspan="3"|''[[Theo of Golden]]''
+|rowspan="3"|[[Allen Levi]]
+|rowspan="3"|[[Atria Books]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/08/30/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=August 30, 2026|access-date=August 20, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 6}}
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/06/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=September 6, 2026|access-date=September 23, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 13}}
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/13/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=September 13, 2026|access-date=September 23, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 20}}
+|rowspan="1"|''The Knave and The Moon''
+|rowspan="1"|[[Rachel Gillig]]
+|rowspan="1"|[[Orbit Books]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/20/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=September 20, 2026|access-date=September 23, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 27}}
+|rowspan="1"|''Fury in Death''
+|rowspan="1"|[[J. D. Robb]]
+|rowspan="1"|[[St. Martin's Press]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/27/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=September 27, 2026|access-date=September 23, 2026}}</ref>
+|-
+!scope="row"|{{dts|October 4}}
+|rowspan="1"|''Hollow Bones''
+|rowspan="1"|[[Jodi Picoult]]
+|rowspan="1"|[[Ballantine Books]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/04/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 4, 2026|access-date=September 23, 2026}}</ref>
+|-
 |}
-
 ==Nonfiction==
 The following list ranks the number-one best-selling nonfiction books, in the combined print and e-books category.
 
