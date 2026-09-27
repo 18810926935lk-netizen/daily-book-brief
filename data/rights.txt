@@ -1,3 +1,2 @@
-# window: 过去48小时 | items: 1
-[2026-09-25] Book Deals: Week of September 28, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMixAFBVV95cUxNU2dYbXRxWW9Na21wbU04RXU2N0JIOVo1cUFhY0VkTDVyR0p4TjVfdlU3ZU1LMUwtNk5WLTRZUzB6c2YxQkttTFY4c3BwYkIya2dmdXFtczZSTGNad0dRRDE3aUx0NU9qQW5tcmZPUjV0ZEx3MXBqb0V6WWlXRjU2SklEbWdoenBQODRIRUJoSkhLZFNISGk5QzR1b04wcmxRdnhjcmZGMEZQRXp6ZlVtdExaSzRXUzVFQ3ZvbDNmdkpoY0I0?oc=5
+# window: 过去48小时 | items: 0
 # window: 过去48小时 | items: 0
