@@ -1,2 +1,1 @@
-# window: 过去48小时 | items: 1
-[2026-09-26] UCSB Economist Shelly Lundberg Wins 2026 Mincer Award, Releases Book - edhat (edhat) || https://news.google.com/rss/articles/CBMimAFBVV95cUxQTXJmX0toOGJuRHVTbWZQX3RYTHVNSWdOMlNhNHp2bHlEVi1LZkpmMzVYdkxzRzhKYU5qN1ctZWZiNnFzLWFZaUx5S0pxaVhwek00bEl4b3JxeWEtZHJjem9hbUFMcDdRU1R5Y2Jua0hJTzJNQk8yVkVGY2lra0xyVno2QUstRmk4WUVDaDVMbm5OOVFadXZLdA?oc=5
+# window: 过去48小时 | items: 0
