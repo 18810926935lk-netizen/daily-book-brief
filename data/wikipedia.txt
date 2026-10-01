@@ -213,6 +213,12 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |rowspan="1"|[[Ballantine Books]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/04/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 4, 2026|access-date=September 23, 2026}}</ref>
 |-
+!scope="row"|{{dts|October 11}}
+|rowspan="1"|''[[Hollywood, Ending]]''
+|rowspan="1"|[[John Green]]
+|rowspan="1"|[[Dutton Books]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/11/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 11, 2026|access-date=September 30, 2026}}</ref>
+|-
 |}
 ==Nonfiction==
 The following list ranks the number-one best-selling nonfiction books, in the combined print and e-books category.
@@ -391,8 +397,45 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 |-
 !scope="row"|{{dts|August 30}}
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/08/30/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=August 30, 2026|access-date=August 20, 2026}}</ref>
+|-
+|-
+!scope="row"|{{dts|September 6}}
+|rowspan="1"|''[[This Is Me (book)| This Is Me]]''
+|rowspan="1"|[[Hayden Panettiere]]
+|rowspan="1"|[[Grand Central Publishing]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/06/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 6, 2026|access-date=September 30, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 13 }}
+|rowspan="1"|''Going Furthur''
+|rowspan="1"|[[Ted Cruz]]
+|rowspan="1"|[[Sentinel (publisher)|Sentinel]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/13/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 13, 2026|access-date=September 30, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 20}}
+|rowspan="1"|''[[This Is Me (book)| This Is Me]]''
+|rowspan="1"|[[Hayden Panettiere]]
+|rowspan="1"|[[Grand Central Publishing]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/20/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 20, 2026|access-date=September 30, 2026}}</ref>
+|-
+!scope="row"|{{dts|September 27}}
+|rowspan="1"|''The Counter Revolution''
+|rowspan="1"|[[Victor Davis Hanson]]
+|rowspan="1"|[[Basic Books]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/27/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 27, 2026|access-date=September 30, 2026}}</ref>
+|-
+!scope="row"|{{dts|October 4}}
+|rowspan="1"|''The Perilous Fight''
+|rowspan="1"|[[Colin Kaepernick]] with [[Nick Chiles]]
+|rowspan="1"|Legacy Lit
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/04/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 4, 2026|access-date=September 30, 2026}}</ref>
+|-
+!scope="row"|{{dts|October 11}}
+|rowspan="1"|''[[Swan Song (memoir) | Swan Song]]''
+|rowspan="1"|[[Charles Spencer, 9th Earl Spencer | Charles Spencer]]
+|rowspan="1"|[[Penguin Press]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/04/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 4, 2026|access-date=September 30, 2026}}</ref>
+|-
 |}
-
 ==See also==
 * [[Publishers Weekly list of bestselling novels in the United States in the 2020s|''Publishers Weekly'' list of bestselling novels in the United States in the 2020s]]
 
