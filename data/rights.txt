@@ -1,2 +1,3 @@
-# window: 过去48小时 | items: 0
+# window: 过去48小时 | items: 1
+[2026-10-02] Book Deals: Week of October 5, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMixgFBVV95cUxNMXRoSUZaRFlOVmotX2ZZUTBpODhPX2FaWFlPYlhldDlxVlFIOGZfQVZ1RTVKZTBxTEgxS2IxWWlxQ1hfWE9sUTVaeUNSeDl1U1J6Q3NrOU1BYWtaanRraEJoRVRTc19hbGRwQmxyakQ3Zks0YTVENGFwUWFkSF9wa214dGt4dHlPOTlqaHYzUWNzd0Iwcm5JSVRCYUVXeEZLQXBCSmlzOXpYUFZGdGFyME1rLXJ3RXN1M2w4U2pWaGl3QXRUaWc?oc=5
 # window: 过去48小时 | items: 0
