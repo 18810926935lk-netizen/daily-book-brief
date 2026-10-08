@@ -1,2 +1,1 @@
-# window: 过去48小时 | items: 1
-[2026-10-06] Meet the 2027 CBC Short Story Prize readers - CBC (CBC) || https://news.google.com/rss/articles/CBMijAFBVV95cUxOdS12enlVTm9OZFhNdkxWc19NNHczemdIUHBOWElETm5IM1dJdmFjUjZvTGxna3ItOHBibWwzTW41UmxyMF9jd1VQUlFkTFQ5MlYtS0NONmRKakRCVF8zUUMwVGpSYWZydmF2SVE3WURZeW9JcUtTNktZS0drM0ViQjJuNnRmZ0RoN2R3eQ?oc=5
+# window: 过去48小时 | items: 0
