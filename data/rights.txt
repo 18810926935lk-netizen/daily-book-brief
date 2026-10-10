@@ -1,3 +1,4 @@
-# window: 过去48小时 | items: 1
+# window: 过去48小时 | items: 2
+[2026-10-10] Book Deals: Week of October 12, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMingFBVV95cUxOV3gxMmF6YmRIeFQ5WkVxNUpRcmdfMnlWSlQ3SXNSeG1HODRlTjdWV1MtaEZGTlRRTVBkdDF4QzJZUUdURlUxYlVUQVVDMjhMUFJkSEZINHIyVUhXdDJ3dUdJSGdUTTdGQ0d2Vi02VnlTUmdaZW9SeFlWb2pWR1lMY2s5TEc1U1FKS3dSR3JyYjNmckU4RUdnNzRnUXNuZw?oc=5
 [2026-10-09] Frankfurt Book Fair 2026: New Layout, Lighter Traffic, and, Of Course, Lots of Deals - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMi_wFBVV95cUxOX2h4bW9zZ3FxWndFdXVza25Td0hsVVFCbEFOWElEUllzd0RrUS0zeFpadEpETFNTM3BmcVRBTF9TcTM1V21aV1hodEx3dGNrQjl4WTRGMWJWalJoX2Z2MGJ4QVg3Ry1ZbnpSZk5wT281MFZwZlJFS0pPOHdtV2UyS01qZTRaUngtcThGTHlLU243RmZvLXd3bmo2TmdjTWVEOEFUVTg0Qy0tM3EzMzdZZ0E5aU9tNExEaXktOU5nQ1ZKVDljYVNmVllRV1cyTEFIUy1JTktDcW1yQ0VCRzhOcUdhUWFwX2xRYjVQbkR5RmFEa1NRS09zeGlHTERieVE?oc=5
 # window: 过去48小时 | items: 0
