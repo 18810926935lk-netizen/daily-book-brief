@@ -1,4 +1,1 @@
-# window: 过去48小时 | items: 3
-[2026-10-09] No Nobel Peace Prize for Mark Carney—yet - Toronto Life (Toronto Life) || https://news.google.com/rss/articles/CBMiekFVX3lxTE41Z19jb0hyRkR4cFE1M0dJWnprTkhMZzRTUnp3Z0V3a2dubWNyZUpDZ3ZKQ2pHXy0ya1JBcmo3OFVGVjNpYkVLUzRmVC1WdG9ra0U1Q003TkloSi15R1BtWkFrMzJTV1hteU9ZRlVVRV9QZmFJWjFUZVBn?oc=5
-[2026-10-09] Former UN human rights chief Navi Pillay wins 2026 Nobel Peace Prize as Trump loses again - The Independent (The Independent) || https://news.google.com/rss/articles/CBMipAFBVV95cUxOdE9UaUtiOXMtRkhTX0dvMENRNmdGSnJJUlhqY0s1QTczN2RZTUhsbUFnWEFwbWdOVU1JeENfdVk5NHlEUklQWm1oWWw5RmVfV0lDRTkzdlN2Z1U0aXN4clpOMXhqeVhfQWwxQU5UNkdOcXAwYnQzVGxzZVlOQXhRV3gtM0NFYm1PVE1yV3RPQVVPeG9xQ2E4R2ROWTlJbVB2dzNueQ?oc=5
-[2026-10-09] Anne Carson wins 2026 Nobel Prize in Literature for inventive work - iNews Zoombangla (iNews Zoombangla) || https://news.google.com/rss/articles/CBMieEFVX3lxTE9vQ2VBX0Z6bEVjREV4ak5aUXBfYmJIVC00dGdwcDhPaER5akpUNzZwdlp6bFRnejJIU3lpUmxFTElWTnFYa182TndGNDFQSThicDRSOWtJMS1VNnFxTmtYb0xIdVFSc0UzSnlERjQ0LWNEa1lWOUk5ZA?oc=5
+# window: 过去48小时 | items: 0

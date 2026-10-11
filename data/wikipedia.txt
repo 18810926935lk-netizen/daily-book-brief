@@ -219,6 +219,12 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |rowspan="1"|[[Dutton Books]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/11/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 11, 2026|access-date=September 30, 2026}}</ref>
 |-
+!scope="row"|{{dts|October 18}}
+|rowspan="1"|''Threshing Day''
+|rowspan="1"|[[Rebecca Yarros]]
+|rowspan="1"|[[Red Tower Books]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/18/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 18, 2026|access-date=October 10, 2026}}</ref>
+|-
 |}
 ==Nonfiction==
 The following list ranks the number-one best-selling nonfiction books, in the combined print and e-books category.
@@ -433,7 +439,13 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 |rowspan="1"|''[[Swan Song (memoir) | Swan Song]]''
 |rowspan="1"|[[Charles Spencer, 9th Earl Spencer | Charles Spencer]]
 |rowspan="1"|[[Penguin Press]]
-|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/04/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 4, 2026|access-date=September 30, 2026}}</ref>
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/11/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 4, 2026|access-date=September 30, 2026}}</ref>
+|-
+!scope="row"|{{dts|October 18}}
+|rowspan="1"|''The Steps''
+|rowspan="1"|[[Sylvester Stallone]]
+|rowspan="1"|[[William Morrow and Company]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/18/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 18, 2026|access-date=October 10, 2026}}</ref>
 |-
 |}
 ==See also==
