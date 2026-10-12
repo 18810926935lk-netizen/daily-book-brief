@@ -1,3 +1,2 @@
-# window: 过去48小时 | items: 1
-[2026-10-11] Book Deals: Week of October 12, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMingFBVV95cUxOV3gxMmF6YmRIeFQ5WkVxNUpRcmdfMnlWSlQ3SXNSeG1HODRlTjdWV1MtaEZGTlRRTVBkdDF4QzJZUUdURlUxYlVUQVVDMjhMUFJkSEZINHIyVUhXdDJ3dUdJSGdUTTdGQ0d2Vi02VnlTUmdaZW9SeFlWb2pWR1lMY2s5TEc1U1FKS3dSR3JyYjNmckU4RUdnNzRnUXNuZw?oc=5
+# window: 过去48小时 | items: 0
 # window: 过去48小时 | items: 0
