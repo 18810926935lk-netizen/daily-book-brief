@@ -196,7 +196,7 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/13/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=September 13, 2026|access-date=September 23, 2026}}</ref>
 |-
 !scope="row"|{{dts|September 20}}
-|rowspan="1"|''The Knave and The Moon''
+|rowspan="1"|''The Knave and the Moon''
 |rowspan="1"|[[Rachel Gillig]]
 |rowspan="1"|[[Orbit Books]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/20/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=September 20, 2026|access-date=September 23, 2026}}</ref>
@@ -225,7 +225,13 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |rowspan="1"|[[Red Tower Books]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/18/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 18, 2026|access-date=October 10, 2026}}</ref>
 |-
+!scope="row"|{{dts|October 25}}
+|rowspan="1"|''The Witch''
+|rowspan="1"|[[Freida McFadden]]
+|rowspan="1"|[[Poisoned Pen Press]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/25/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 25, 2026|access-date=October 16, 2026}}</ref>
 |}
+
 ==Nonfiction==
 The following list ranks the number-one best-selling nonfiction books, in the combined print and e-books category.
 
@@ -354,7 +360,7 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/06/07/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=June 7, 2026|access-date=May 30, 2026}}</ref>
 |-
 !scope="row"|{{dts|June 14}}
-|rowspan="1"|''The Land and Its People''
+|rowspan="1"|''[[The Land and Its People]]''
 |rowspan="1"|[[David Sedaris]]
 |rowspan="1"|[[Little, Brown and Company]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/06/14/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=June 14, 2026|access-date=June 23, 2026}}</ref>
@@ -378,7 +384,7 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/07/05/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=July 5, 2026|access-date=July 11, 2026}}</ref>
 |-
 !scope="row"|{{dts|July 12}}
-|rowspan="8"|''[[Regime Change (book)|Regime Change]]''
+|rowspan="8"|''[[Regime Change: Inside the Imperial Presidency of Donald Trump|Regime Change]]''
 |rowspan="8"|[[Maggie Haberman]] and [[Jonathan Swan]]
 |rowspan="8"|[[Simon & Schuster]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/07/12/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=July 12, 2026|access-date=July 11, 2026}}</ref>
@@ -404,27 +410,26 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 !scope="row"|{{dts|August 30}}
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/08/30/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=August 30, 2026|access-date=August 20, 2026}}</ref>
 |-
-|-
 !scope="row"|{{dts|September 6}}
-|rowspan="1"|''[[This Is Me (book)| This Is Me]]''
+|rowspan="1"|''[[This Is Me (book)|This Is Me]]''
 |rowspan="1"|[[Hayden Panettiere]]
 |rowspan="1"|[[Grand Central Publishing]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/06/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 6, 2026|access-date=September 30, 2026}}</ref>
 |-
-!scope="row"|{{dts|September 13 }}
-|rowspan="1"|''Going Furthur''
+!scope="row"|{{dts|September 13}}
+|rowspan="1"|''Going Further''
 |rowspan="1"|[[Ted Cruz]]
 |rowspan="1"|[[Sentinel (publisher)|Sentinel]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/13/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 13, 2026|access-date=September 30, 2026}}</ref>
 |-
 !scope="row"|{{dts|September 20}}
-|rowspan="1"|''[[This Is Me (book)| This Is Me]]''
+|rowspan="1"|''[[This Is Me (book)|This Is Me]]''
 |rowspan="1"|[[Hayden Panettiere]]
 |rowspan="1"|[[Grand Central Publishing]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/20/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 20, 2026|access-date=September 30, 2026}}</ref>
 |-
 !scope="row"|{{dts|September 27}}
-|rowspan="1"|''The Counter Revolution''
+|rowspan="1"|''The Counterrevolution''
 |rowspan="1"|[[Victor Davis Hanson]]
 |rowspan="1"|[[Basic Books]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/09/27/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=September 27, 2026|access-date=September 30, 2026}}</ref>
@@ -436,18 +441,24 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/04/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 4, 2026|access-date=September 30, 2026}}</ref>
 |-
 !scope="row"|{{dts|October 11}}
-|rowspan="1"|''[[Swan Song (memoir) | Swan Song]]''
-|rowspan="1"|[[Charles Spencer, 9th Earl Spencer | Charles Spencer]]
+|rowspan="1"|''[[Swan Song (memoir)|Swan Song]]''
+|rowspan="1"|[[Charles Spencer, 9th Earl Spencer|Charles Spencer]]
 |rowspan="1"|[[Penguin Press]]
-|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/11/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 4, 2026|access-date=September 30, 2026}}</ref>
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/11/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 11, 2026|access-date=September 30, 2026}}</ref>
 |-
 !scope="row"|{{dts|October 18}}
 |rowspan="1"|''The Steps''
 |rowspan="1"|[[Sylvester Stallone]]
-|rowspan="1"|[[William Morrow and Company]]
+|rowspan="1"|[[William Morrow and Company|William Morrow]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/18/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 18, 2026|access-date=October 10, 2026}}</ref>
 |-
+!scope="row"|{{dts|October 25}}
+|rowspan="1"|''One Helluva Ride''
+|rowspan="1"|[[Michael Douglas]] with [[Shane Salerno]] and Michael Fleming Jr
+|rowspan="1"|[[Grand Central Publishing]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/25/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 25, 2026|access-date=October 16, 2026}}</ref>
 |}
+
 ==See also==
 * [[Publishers Weekly list of bestselling novels in the United States in the 2020s|''Publishers Weekly'' list of bestselling novels in the United States in the 2020s]]
 
