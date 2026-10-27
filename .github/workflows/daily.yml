@@ -60,7 +60,7 @@ jobs:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           SITE_BASE: ${{ vars.SITE_BASE }}
           TZ: Asia/Shanghai
-        run: python notify.py
+        run: if [ "$GITHUB_EVENT_NAME" = schedule ]; then python notify.py; else echo "Manual-test-notification-skipped"; fi
 
       - name: publish
         run: |
@@ -74,7 +74,7 @@ jobs:
 
       # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
       - name: notify-failure
-        if: failure()
+        if: failure() && github.event_name == 'schedule'
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TZ: Asia/Shanghai
