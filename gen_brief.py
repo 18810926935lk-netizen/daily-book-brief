@@ -97,7 +97,7 @@ r = call(65536)
 if r.status_code == 400 and 'max_tokens' in r.text:
     print('max_tokens=65536 rejected, falling back to 32768...')
     r = call(32768)
-print('API_ERROR:', str(r.json().get('error', {}))[:500].replace(token, '[redacted]')) if not r.ok and 'application/json' in r.headers.get('Content-Type', '') else None; r.raise_for_status()
+print('API_DIAG:', r.headers.get('Content-Type', ''), [(k, k in r.text.lower()) for k in ('quota','balance','model','token','credit','limit','expired','invalid','余额','额度','模型','过期','权限')]) if not r.ok else None; r.raise_for_status()
 data = r.json()
 if data.get('type') == 'error':
     raise SystemExit('API error: ' + json.dumps(data.get('error', {}), ensure_ascii=False)[:500])
