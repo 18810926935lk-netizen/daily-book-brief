@@ -76,7 +76,7 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/03/22/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=March 22, 2026|access-date=March 15, 2026}}</ref>
 |-
 !scope="row"|{{dts|March 29}}
-|rowspan="1"|''Judge Stone''
+|rowspan="1"|''[[Judge Stone (novel)|Judge Stone]]''
 |rowspan="1"|[[Viola Davis]] and [[James Patterson]]
 |rowspan="1"|[[Little, Brown and Company]] and JVL Media
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/03/29/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=March 29, 2026|access-date=March 28, 2026}}</ref>
@@ -230,6 +230,12 @@ The following list ranks the number-one best-selling fiction books, in the combi
 |rowspan="1"|[[Freida McFadden]]
 |rowspan="1"|[[Poisoned Pen Press]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/25/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=October 25, 2026|access-date=October 16, 2026}}</ref>
+|-
+!scope="row"|{{dts|November 1}}
+|rowspan="1"|''Threshing Day''
+|rowspan="1"|[[Rebecca Yarros]]
+|rowspan="1"|[[Red Tower Books]]
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/11/01/combined-print-and-e-book-fiction/|title=Combined Print & E-Book Fiction|work=The New York Times|date=November 1, 2026|access-date=October 25, 2026}}</ref>
 |}
 
 ==Nonfiction==
@@ -356,13 +362,12 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 !scope="row"|{{dts|June 7}}
 |rowspan="1"|''Liar's Kingdom''
 |rowspan="1"|[[Andrew Weissmann]]
-|rowspan="1"|[[Little, Brown and Company]]
+|rowspan="2"|[[Little, Brown and Company]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/06/07/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=June 7, 2026|access-date=May 30, 2026}}</ref>
 |-
 !scope="row"|{{dts|June 14}}
 |rowspan="1"|''[[The Land and Its People]]''
 |rowspan="1"|[[David Sedaris]]
-|rowspan="1"|[[Little, Brown and Company]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/06/14/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=June 14, 2026|access-date=June 23, 2026}}</ref>
 |-
 !scope="row"|{{dts|June 21}}
@@ -455,8 +460,13 @@ The following list ranks the number-one best-selling nonfiction books, in the co
 !scope="row"|{{dts|October 25}}
 |rowspan="1"|''One Helluva Ride''
 |rowspan="1"|[[Michael Douglas]] with [[Shane Salerno]] and Michael Fleming Jr
-|rowspan="1"|[[Grand Central Publishing]]
+|rowspan="2"|[[Grand Central Publishing]]
 |align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/10/25/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=October 25, 2026|access-date=October 16, 2026}}</ref>
+|-
+!scope="row"|{{dts|November 1}}
+|rowspan="1"|''In the Shadow of Eight''
+|rowspan="1"|Collin Gosselin with Allie Kingsley Baker
+|align="center"|<ref>{{cite web|url=https://www.nytimes.com/books/best-sellers/2026/11/01/combined-print-and-e-book-nonfiction/|title=Combined Print & E-Book Nonfiction|work=The New York Times|date=November 1, 2026|access-date=October 25, 2026}}</ref>
 |}
 
 ==See also==

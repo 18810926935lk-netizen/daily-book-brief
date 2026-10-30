@@ -1,3 +1,2 @@
-# window: 过去48小时 | items: 1
-[2026-10-19] Religion Book Deals: Oct. 21, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMiuwFBVV95cUxObm45Y2ZJNE5pZldUUlo5Q3pScF94cGFvSngxY3BNZThlSG5sSVN5aUdfT0x2MnIxY1FUaDlyZnd3X0pLaDlMY3ZORXgwNXpiZm9KQU5HNmR2TFQ0UEgxYkZhVW1WWUstWERBVEt4cHg3UlM5QW1WSjE5NWpoWUtFeGRsTXZpQy1kRzQySVdZbEJwQ29hOHBrR05PcktsTmkyRmlLS0dfSHhwSTdlSnNOMHc3el9GVnUta2hr?oc=5
+# window: 过去48小时 | items: 0
 # window: 过去48小时 | items: 0
