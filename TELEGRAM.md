@@ -1,5 +1,18 @@
 # Telegram source
 
+## WebA alternative (diagnostic, not enabled for scheduled collection)
+
+`authorize_telegram_web.py` creates a fresh, owner-approved browser session without
+an API application ID. Only allowlisted authentication fields are sent by stdin to
+the repository secret `TELEGRAM_WEB_STATE`. No existing profile is accessed.
+This is account-level authorization; revoke it in Telegram Settings > Devices.
+The local browser closes before dispatching `telegram_web_probe=true` on the
+existing workflow. Two sequential fresh runners restore the same authorization,
+download a known public-channel attachment and verify PDF text extraction.
+No state, PDF or extracted text is persisted in logs, artifacts or caches.
+The scheduled source is not switched on by this helper. Actual successful cloud
+runs are required before implementing and enabling recent-attachment collection.
+
 Only `demagazinesharing` is read. No messages are sent. No desktop session is accessed.
 
 ## First authorization

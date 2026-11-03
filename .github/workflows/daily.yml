@@ -14,6 +14,11 @@ on:
         type: boolean
         default: false
 
+      telegram_web_probe:
+        description: 'Two fresh cloud WebA login/download tests; no publication or notification'
+        type: boolean
+        default: false
+
       telegram_only:
         description: 'Validate Telegram download/extraction only; no generation or notification'
         type: boolean
@@ -27,6 +32,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  telegram-web-probe:
+    if: inputs.telegram_web_probe == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    strategy:
+      max-parallel: 1
+      fail-fast: true
+      matrix:
+        attempt: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install playwright==1.56.0 PyMuPDF==1.28.2
+      - run: python -m playwright install --with-deps chromium
+      - name: Restore login and verify one PDF
+        env:
+          TELEGRAM_WEB_STATE: ${{ secrets.TELEGRAM_WEB_STATE }}
+        run: python probe_telegram_web.py
+
   cloud-probe:
     if: inputs.cloud_probe == true
     runs-on: ubuntu-latest
@@ -41,7 +69,7 @@ jobs:
       - run: python probe_telegram_cloud.py
 
   build:
-    if: inputs.cloud_probe != true
+    if: inputs.cloud_probe != true && inputs.telegram_web_probe != true
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
