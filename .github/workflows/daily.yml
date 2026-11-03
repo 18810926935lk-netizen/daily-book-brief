@@ -34,7 +34,7 @@ concurrency:
 jobs:
   telegram-web-probe:
     if: inputs.telegram_web_probe == true
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read
