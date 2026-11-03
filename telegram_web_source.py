@@ -82,6 +82,8 @@ def collect(page, rows, out_dir):
             total += size
             path = out_dir / (item['id'] + Path(item['filename']).suffix.lower())
             try:
+                # WebA consumes tgaddr on initial load, not subsequent hash navigation.
+                page.goto('about:blank')
                 page.goto(channel_url(item['id']), timeout=45000)
                 attachment = page.locator('.MessageList .File.interactive').filter(has_text=item['filename']).first
                 attachment.wait_for(timeout=45000)
