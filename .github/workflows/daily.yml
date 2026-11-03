@@ -19,6 +19,11 @@ on:
         type: boolean
         default: false
 
+      telegram_inventory:
+        description: 'Inspect public channel attachment filenames only'
+        type: boolean
+        default: false
+
       telegram_only:
         description: 'Validate Telegram download/extraction only; no generation or notification'
         type: boolean
@@ -32,6 +37,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  telegram-inventory:
+    if: inputs.telegram_inventory == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps chromium
+      - env:
+          TELEGRAM_WEB_STATE: ${{ secrets.TELEGRAM_WEB_STATE }}
+        run: python telegram_web_source.py
+
   telegram-web-probe:
     if: inputs.telegram_web_probe == true
     runs-on: ubuntu-24.04
@@ -69,7 +91,7 @@ jobs:
       - run: python probe_telegram_cloud.py
 
   build:
-    if: inputs.cloud_probe != true && inputs.telegram_web_probe != true
+    if: inputs.cloud_probe != true && inputs.telegram_web_probe != true && inputs.telegram_inventory != true
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
