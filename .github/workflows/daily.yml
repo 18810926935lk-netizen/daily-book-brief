@@ -107,6 +107,7 @@ jobs:
 
       - name: telegram-deps
         if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
+        continue-on-error: true
         run: |
           pip install -r requirements-telegram.txt playwright==1.56.0
           if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python -m playwright install --with-deps chromium; fi

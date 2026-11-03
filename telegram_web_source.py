@@ -101,7 +101,7 @@ def collect(page, rows, out_dir):
                 key = item['issue_key']
                 actual_key = key
                 if not item['issue_date_candidate']:
-                    front = re.sub(r'\s+', ' ', ' '.join(t for _, t in pages[:2]))
+                    front = re.sub(r'\s+', ' ', pages[0][1][:1600])
                     actual_date = issue_date(front, date.today())
                     if not actual_date:
                         raise ValueError('undated_issue_not_verified')
@@ -109,7 +109,7 @@ def collect(page, rows, out_dir):
                 entry = {'message_id': item['id'], 'sha256': digest,
                          'collected_at': datetime.now(timezone.utc).isoformat()}
                 if digest not in hashes and actual_key not in seen:
-                    passages = select_passages(pages, budget=7500)
+                    passages = select_passages(pages, budget=6000)
                     documents.append({'filename': item['filename'], 'publication_candidate': item['publication'],
                         'issue_date_candidate': item['issue_date_candidate'],
                         'source': f'https://t.me/{CHANNEL}/{item["id"]}',
@@ -120,11 +120,17 @@ def collect(page, rows, out_dir):
                 seen[actual_key] = entry
                 break
             except Exception as exc:
-                skipped.append({'message_id': item['id'], 'reason': type(exc).__name__})
+                reason = str(exc) if str(exc) in {
+                    'download_failed', 'file_size_exceeds_limit', 'scan_needs_ocr',
+                    'undated_issue_not_verified'} else type(exc).__name__
+                skipped.append({'message_id': item['id'], 'reason': reason})
+                print(f'SKIPPED: {item["publication"]}; message={item["id"]}; reason={reason}', flush=True)
             finally:
                 path.unlink(missing_ok=True)
     payload = {'channel': CHANNEL, 'documents': documents, 'skipped': skipped,
                'notice': '只检查最近至多约800条附件，每刊选择最新一期的一版。刊期候选来自文件名，月刊日期的01只是去重标识，不代表出版日；必须以正文核实。扫描件未OCR。'}
+    while len(json.dumps(payload, ensure_ascii=False)) > 84000 and any(d['passages'] for d in documents):
+        max(documents, key=lambda d: sum(len(p['text']) for p in d['passages']))['passages'].pop()
     (out_dir/'source.json').write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')
     print(f'Telegram Web: inventory={len(rows)}, selected_issues={len(groups)}, extracted={len(documents)}, skipped={len(skipped)}')
     if groups and not documents and skipped:

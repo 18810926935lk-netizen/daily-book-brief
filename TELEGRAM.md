@@ -1,6 +1,6 @@
 # Telegram source
 
-## WebA alternative (diagnostic, not enabled for scheduled collection)
+## WebA source
 
 `authorize_telegram_web.py` creates a fresh, owner-approved browser session without
 an API application ID. Only allowlisted authentication fields are sent by stdin to
@@ -10,8 +10,43 @@ The local browser closes before dispatching `telegram_web_probe=true` on the
 existing workflow. Two sequential fresh runners restore the same authorization,
 download a known public-channel attachment and verify PDF text extraction.
 No state, PDF or extracted text is persisted in logs, artifacts or caches.
-The scheduled source is not switched on by this helper. Actual successful cloud
-runs are required before implementing and enabling recent-attachment collection.
+The scheduled source is not switched on by this helper. Two fresh-runner download
+tests passed on run 41604153063. `TELEGRAM_SOURCE_MODE=web` selects the collector;
+`TELEGRAM_ENABLED=true` enables it on the existing daily workflow. Manual
+`telegram_only=true` tests collection without publishing, notification or saving
+processed-state changes back to git.
+
+### Publication and edition selection
+
+Priority sources: Wall Street Journal, Washington Post, New York Times (including
+its Book Review), Economist, Financial Times, Guardian, New Yorker; also New York
+Review of Books, London Review of Books, Times Literary Supplement, Atlantic,
+Literary Review and Publishers Weekly when identifiable attachments are available.
+
+`telegram_publications.py` classifies filenames conservatively. The Web collector
+checks approximately the most recent 800 attachments, then selects one latest
+issue per publication, up to 12 issues. It does not claim exhaustive history coverage.
+Regional editions with the same title/date are grouped before download. The smaller
+usable edition is preferred; alternatives are tried only if the first fails.
+Only the successfully processed issue key/message ID/hash/time is saved in
+`data/telegram_web_seen.json`; a successful normal publication commits this state.
+Subsequent runs skip a processed latest issue instead of downloading older backlogs.
+
+Undated FT UK/US/EU files in the latest adjacent upload group are treated as
+alternative editions provisionally. The first downloaded file must contain a
+parseable recent date in its first-page header area; otherwise it is skipped.
+Filename dates and month-only day-01 keys are deduplication candidates, not verified
+publication dates. The summary must verify issue information from source text.
+Unknown filenames/dates are excluded rather than guessed. Daily byte limits are
+60 MiB/file and 250 MiB total, and the collection step is limited to 15 minutes.
+
+Book/review/literary passages receive extra weight. Text is bounded to fit the
+existing brief prompt, with source URLs and PDF file page numbers. Raw attachments
+are deleted after extraction; excerpts remain only in runner temporary storage and
+are sent to the existing GLM service for summarization. There is no OCR yet.
+Partial failures produce a visible Actions warning and explicit skipped-source data.
+
+`python -m unittest test_telegram_publications test_telegram_web_collection test_telegram_web_state test_telegram_source -v`
 
 Only `demagazinesharing` is read. No messages are sent. No desktop session is accessed.
 
