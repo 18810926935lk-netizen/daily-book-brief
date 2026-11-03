@@ -1,0 +1,4 @@
+Telethon==1.45.0
+PyMuPDF==1.28.2
+python-docx==1.2.0
+python-socks[asyncio]>=2.4,<3

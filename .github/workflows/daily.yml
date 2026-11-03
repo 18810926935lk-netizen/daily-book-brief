@@ -9,6 +9,11 @@ on:
         type: boolean
         default: false
 
+      telegram_only:
+        description: 'Validate Telegram download/extraction only; no generation or notification'
+        type: boolean
+        default: false
+
 permissions:
   contents: write
 
@@ -30,7 +35,28 @@ jobs:
       - name: deps
         run: pip install htmldocx requests
 
+      - name: telegram-deps
+        if: vars.TELEGRAM_ENABLED == 'true'
+        run: pip install -r requirements-telegram.txt
+
+      - name: telegram-source
+        id: telegram
+        if: vars.TELEGRAM_ENABLED == 'true'
+        continue-on-error: true
+        env:
+          TELEGRAM_AUTH_JSON: ${{ secrets.TELEGRAM_AUTH_JSON }}
+          TELEGRAM_WORK_DIR: ${{ runner.temp }}/telegram-private
+        run: python telegram_source.py
+
+      - name: telegram-check
+        if: inputs.telegram_only == true
+        env:
+          TELEGRAM_ENABLED: ${{ vars.TELEGRAM_ENABLED }}
+          TELEGRAM_OUTCOME: ${{ steps.telegram.outcome }}
+        run: test "$TELEGRAM_ENABLED" = true && test "$TELEGRAM_OUTCOME" = success
+
       - name: collect
+        if: inputs.telegram_only != true
         env:
           TZ: Asia/Shanghai
         run: |
@@ -47,13 +73,16 @@ jobs:
           echo "collected:"; wc -c data/*.txt
 
       - name: generate
+        if: inputs.telegram_only != true
         env:
+          TELEGRAM_SOURCE: ${{ runner.temp }}/telegram-private/source.json
           GLM_BASE_URL: ${{ secrets.GLM_BASE_URL }}
           GLM_TOKEN: ${{ secrets.GLM_TOKEN }}
           TZ: Asia/Shanghai
         run: python gen_brief.py
 
       - name: docx
+        if: inputs.telegram_only != true
         run: |
           D=$(date +%F)
           python make_docx.py "site/${D}.html" "site/${D}.docx" || echo "WARN: docx failed, continue"
@@ -61,6 +90,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: publish
+        if: inputs.telegram_only != true
         run: |
           git config user.name "brief-bot"
           git config user.email "brief-bot@users.noreply.github.com"
@@ -71,7 +101,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: notify
-        if: github.event_name == 'schedule' || inputs.send_notification == true
+        if: inputs.telegram_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           SITE_BASE: ${{ vars.SITE_BASE }}
@@ -80,7 +110,7 @@ jobs:
 
       # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
       - name: notify-failure
-        if: failure() && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: failure() && inputs.telegram_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TZ: Asia/Shanghai
