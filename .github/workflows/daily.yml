@@ -110,13 +110,17 @@ jobs:
         continue-on-error: true
         run: |
           pip install -r requirements-telegram.txt playwright==1.56.0
-          if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python -m playwright install --with-deps chromium; fi
+          if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then
+            python -m playwright install --with-deps chromium
+            sudo apt-get update -qq
+            sudo apt-get install -y tesseract-ocr tesseract-ocr-eng
+          fi
 
       - name: telegram-source
         id: telegram
         if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 25
         env:
           TELEGRAM_AUTH_JSON: ${{ secrets.TELEGRAM_AUTH_JSON }}
           TELEGRAM_WEB_STATE: ${{ secrets.TELEGRAM_WEB_STATE }}

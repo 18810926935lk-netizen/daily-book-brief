@@ -66,7 +66,7 @@ def collect(page, rows, out_dir):
     groups = select_issues(rows, seen, date.today())
     documents, skipped = [], []
     total = 0
-    deadline = time.monotonic() + 600
+    deadline = time.monotonic() + 1200
     hashes = {v['sha256'] for v in seen.values()}
     for variants in groups:
         if time.monotonic() > deadline:
@@ -98,8 +98,13 @@ def collect(page, rows, out_dir):
                     raise ValueError('file_size_exceeds_limit')
                 digest = hashlib.sha256(path.read_bytes()).hexdigest()
                 pages = extract(path)
+                unread = 0
+                if path.suffix == '.pdf' and sum(len(t.strip()) >= 100 for _, t in pages) < max(1, len(pages)*0.3):
+                    from telegram_ocr import ocr_pdf
+                    pages, unread = ocr_pdf(path, pages, seconds=max(1, min(240, deadline-time.monotonic())))
+                    print(f'OCR: {item["publication"]}; pages={len(pages)}; low_text_pages_remaining={unread}', flush=True)
                 if sum(len(t.strip()) for _, t in pages) < 200:
-                    raise ValueError('scan_needs_ocr')
+                    raise ValueError('scan_ocr_failed')
                 key = item['issue_key']
                 actual_key = key
                 if not item['issue_date_candidate']:
@@ -115,6 +120,7 @@ def collect(page, rows, out_dir):
                     documents.append({'filename': item['filename'], 'publication_candidate': item['publication'],
                         'issue_date_candidate': item['issue_date_candidate'],
                         'source': f'https://t.me/{CHANNEL}/{item["id"]}',
+                        'ocr_low_text_pages_remaining': unread,
                         'passages': passages, 'pages_or_paragraphs': len(pages)})
                     hashes.add(digest)
                     print(f'EXTRACTED: {item["publication"]}; message={item["id"]}; pages={len(pages)}; passages={len(passages)}; regional_alternatives_skipped={len(variants)-1}')
@@ -123,14 +129,14 @@ def collect(page, rows, out_dir):
                 break
             except Exception as exc:
                 reason = str(exc) if str(exc) in {
-                    'download_failed', 'file_size_exceeds_limit', 'scan_needs_ocr',
+                    'download_failed', 'file_size_exceeds_limit', 'scan_ocr_failed',
                     'undated_issue_not_verified'} else type(exc).__name__
                 skipped.append({'message_id': item['id'], 'reason': reason})
                 print(f'SKIPPED: {item["publication"]}; message={item["id"]}; reason={reason}', flush=True)
             finally:
                 path.unlink(missing_ok=True)
     payload = {'channel': CHANNEL, 'documents': documents, 'skipped': skipped,
-               'notice': '只检查最近至多约800条附件，每刊选择最新一期的一版。刊期候选来自文件名，月刊日期的01只是去重标识，不代表出版日；必须以正文核实。扫描件未OCR。'}
+               'notice': '只检查最近约800条附件，每刊选择最新一期的一版。刊期候选来自文件名，月刊日期的01只是去重标识，不代表出版日；必须以正文核实。OCR段落已标记，识别可能有错；剩余低文字页数包含空白页、广告及未识别页面，不能声称已读完整期。'}
     while len(json.dumps(payload, ensure_ascii=False)) > 84000 and any(d['passages'] for d in documents):
         max(documents, key=lambda d: sum(len(p['text']) for p in d['passages']))['passages'].pop()
     (out_dir/'source.json').write_text(json.dumps(payload, ensure_ascii=False), encoding='utf-8')

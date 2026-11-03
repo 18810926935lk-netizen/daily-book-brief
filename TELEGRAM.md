@@ -38,12 +38,15 @@ parseable recent date in its first-page header area; otherwise it is skipped.
 Filename dates and month-only day-01 keys are deduplication candidates, not verified
 publication dates. The summary must verify issue information from source text.
 Unknown filenames/dates are excluded rather than guessed. Daily byte limits are
-60 MiB/file and 250 MiB total, and the collection step is limited to 15 minutes.
+60 MiB/file and 250 MiB total, and the collection step is limited to 25 minutes.
 
 Book/review/literary passages receive extra weight. Text is bounded to fit the
 existing brief prompt, with source URLs and PDF file page numbers. Raw attachments
 are deleted after extraction; excerpts remain only in runner temporary storage and
-are sent to the existing GLM service for summarization. There is no OCR yet.
+are sent to the existing GLM service for summarization. Image-only PDFs use local
+English Tesseract OCR on the runner (two workers, up to 120 pages / 240 seconds
+per file). OCR-derived passages are labeled and low-text pages counted; incomplete
+recognition is not represented as complete reading. Images are deleted immediately.
 Partial failures produce a visible Actions warning and explicit skipped-source data.
 
 `python -m unittest test_telegram_publications test_telegram_web_collection test_telegram_web_state test_telegram_source -v`
