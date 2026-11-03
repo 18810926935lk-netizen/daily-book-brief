@@ -52,6 +52,7 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - env:
           TELEGRAM_WEB_STATE: ${{ secrets.TELEGRAM_WEB_STATE }}
+          TELEGRAM_INVENTORY_ONLY: 'true'
         run: python telegram_web_source.py
 
   telegram-web-probe:
@@ -92,8 +93,8 @@ jobs:
 
   build:
     if: inputs.cloud_probe != true && inputs.telegram_web_probe != true && inputs.telegram_inventory != true
-    runs-on: ubuntu-latest
-    timeout-minutes: 40
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -105,24 +106,29 @@ jobs:
         run: pip install htmldocx requests
 
       - name: telegram-deps
-        if: vars.TELEGRAM_ENABLED == 'true'
-        run: pip install -r requirements-telegram.txt
+        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
+        run: |
+          pip install -r requirements-telegram.txt playwright==1.56.0
+          if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python -m playwright install --with-deps chromium; fi
 
       - name: telegram-source
         id: telegram
-        if: vars.TELEGRAM_ENABLED == 'true'
+        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
         continue-on-error: true
+        timeout-minutes: 15
         env:
           TELEGRAM_AUTH_JSON: ${{ secrets.TELEGRAM_AUTH_JSON }}
+          TELEGRAM_WEB_STATE: ${{ secrets.TELEGRAM_WEB_STATE }}
           TELEGRAM_WORK_DIR: ${{ runner.temp }}/telegram-private
-        run: python telegram_source.py
+        run: |
+          if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python telegram_web_source.py; else python telegram_source.py; fi
 
       - name: telegram-check
         if: inputs.telegram_only == true
         env:
           TELEGRAM_ENABLED: ${{ vars.TELEGRAM_ENABLED }}
           TELEGRAM_OUTCOME: ${{ steps.telegram.outcome }}
-        run: test "$TELEGRAM_ENABLED" = true && test "$TELEGRAM_OUTCOME" = success
+        run: test "$TELEGRAM_OUTCOME" = success
 
       - name: collect
         if: inputs.telegram_only != true

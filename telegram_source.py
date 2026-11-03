@@ -33,7 +33,8 @@ def select_passages(pages, budget=10000):
         text = text.replace('\x00', '')
         for start in range(0, len(text), 2200):
             window = text[start:start + 2600]
-            score = len(TOPICS.findall(window))
+            score = len(TOPICS.findall(window)) + 12 * len(re.findall(
+                r'\b(book review|books|nonfiction|non-fiction|biography|memoir|publisher|novelist|literary)\b', window, re.I))
             if score:
                 candidates.append((score, locator, window))
     chosen, used = [], 0
