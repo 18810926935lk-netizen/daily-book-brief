@@ -9,6 +9,11 @@ on:
         type: boolean
         default: false
 
+      cloud_probe:
+        description: 'Public Telegram Web connectivity test only, no account access'
+        type: boolean
+        default: false
+
       telegram_only:
         description: 'Validate Telegram download/extraction only; no generation or notification'
         type: boolean
@@ -22,7 +27,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  cloud-probe:
+    if: inputs.cloud_probe == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python probe_telegram_cloud.py
+
   build:
+    if: inputs.cloud_probe != true
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
