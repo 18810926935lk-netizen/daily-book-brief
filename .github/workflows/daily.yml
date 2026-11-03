@@ -1,8 +1,13 @@
 name: daily-brief
 on:
   schedule:
-    - cron: '25 22 * * *'   # UTC 22:25 = 北京时间 06:25
-  workflow_dispatch: {}       # 支持手动触发测试
+    - cron: '0 22 * * *'   # UTC 22:00 = 北京时间 06:00
+  workflow_dispatch:
+    inputs:
+      send_notification:
+        description: 'Send this run to WeChat (leave false for diagnostics)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -55,13 +60,6 @@ jobs:
         env:
           TZ: Asia/Shanghai
 
-      - name: notify
-        env:
-          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
-          SITE_BASE: ${{ vars.SITE_BASE }}
-          TZ: Asia/Shanghai
-        run: if [ "$GITHUB_EVENT_NAME" = schedule ]; then python notify.py; else echo "Manual-test-notification-skipped"; fi
-
       - name: publish
         run: |
           git config user.name "brief-bot"
@@ -72,13 +70,21 @@ jobs:
         env:
           TZ: Asia/Shanghai
 
+      - name: notify
+        if: github.event_name == 'schedule' || inputs.send_notification == true
+        env:
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
+          SITE_BASE: ${{ vars.SITE_BASE }}
+          TZ: Asia/Shanghai
+        run: python notify.py
+
       # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
       - name: notify-failure
-        if: failure() && github.event_name == 'schedule'
+        if: failure() && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TZ: Asia/Shanghai
         run: |
-          curl -s -X POST "https://sctapi.ftqq.com/${SERVERCHAN_KEY}.send" \
+          curl --fail --silent --show-error --output /dev/null -X POST "https://sctapi.ftqq.com/${SERVERCHAN_KEY}.send" \
             -d "title=图书简报管道异常 $(date +%F)" \
             -d "desp=当日简报生成失败，今日微信无日报，请查看日志：https://github.com/18810926935lk-netizen/daily-book-brief/actions"

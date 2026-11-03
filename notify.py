@@ -11,8 +11,7 @@ site_base = os.environ.get('SITE_BASE', '').rstrip('/')
 
 html_path = os.path.join(BASE, 'site', f'{TODAY}.html')
 if not os.path.exists(html_path):
-    print('WARN: 今日 HTML 不存在，跳过推送（工作流仍标记成功以便排查日志）')
-    raise SystemExit(0)
+    raise SystemExit('ERROR: 今日 HTML 不存在，推送失败')
 
 html = open(html_path, encoding='utf-8').read()
 plain = re.sub(r'<[^>]+>', ' ', html)
@@ -29,14 +28,38 @@ desp = f"""**今日简报已生成** [点此阅读全文]({url})
 
 """ + '\n'.join('- ' + h.strip() for h in heads) + f"""
 
-（每日 06:25 自动生成 · 大愚文化）"""
+（每日 06:00 自动生成 · 大愚文化）"""
 
 if not key or 'SERVERCHAN' in key:
-    print('WARN: SERVERCHAN_KEY 未配置，仅打印不推送')
-    print(title)
-    print(desp)
-    raise SystemExit(0)
+    raise SystemExit('ERROR: SERVERCHAN_KEY 未配置')
+if not site_base.startswith('https://') or len(plain.strip()) < 100:
+    raise SystemExit('ERROR: SITE_BASE 无效或简报内容为空')
 
 import requests
-r = requests.post(f'https://sctapi.ftqq.com/{key}.send', data={'title': title, 'desp': desp}, timeout=30)
-print('serverchan:', r.status_code, r.text[:200])
+import time
+# Wait until the published full text is available before sending its link.
+for attempt in range(30):
+    try:
+        page = requests.get(url, timeout=20)
+        if page.status_code == 200 and page.content == html.encode('utf-8'):
+            break
+    except requests.RequestException:
+        pass
+    time.sleep(10)
+else:
+    raise SystemExit('ERROR: 今日全文尚未发布，停止推送无效链接')
+
+try:
+    r = requests.post(f'https://sctapi.ftqq.com/{key}.send', data={'title': title, 'desp': desp}, timeout=30)
+except requests.RequestException:
+    raise SystemExit('ERROR: ServerChan 网络请求失败（隐藏含密钥的请求地址）')
+try:
+    result = r.json()
+except ValueError:
+    raise SystemExit(f'ERROR: ServerChan HTTP {r.status_code}, invalid JSON')
+code = result.get('code')
+errno = result.get('data', {}).get('errno')
+print(f'serverchan: HTTP {r.status_code}, code={code}, errno={errno}')
+if r.status_code != 200 or code != 0 or errno not in (None, 0):
+    raise SystemExit('ERROR: ServerChan 未确认发送成功')
+print('WeChat push accepted; published full text verified.')
