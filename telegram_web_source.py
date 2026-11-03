@@ -60,6 +60,22 @@ def size_bytes(text):
     return int(float(match[1]) * {'B':1, 'KB':1024, 'MB':1024**2, 'GB':1024**3}[match[2].upper()])
 
 
+def upload_date(page, message_id):
+    stamp = page.locator(f'.MessageList [data-message-id="{int(message_id)}"] .message-time').first
+    stamp.hover(timeout=5000)
+    for _ in range(5):
+        title = stamp.get_attribute('title')
+        if title:
+            first_line = title.splitlines()[0]
+            # Web context uses en-US and Asia/Shanghai explicitly.
+            numeric = re.search(r'(?<!\d)(\d{1,2})/(\d{1,2})/(20\d{2})', first_line)
+            if numeric:
+                return date(int(numeric[3]), int(numeric[1]), int(numeric[2]))
+            return issue_date(first_line, date.today())
+        page.wait_for_timeout(200)
+    return None
+
+
 def collect(page, rows, out_dir):
     state_path = Path(__file__).parent / 'data/telegram_web_seen.json'
     seen = json.loads(state_path.read_text()) if state_path.exists() else {}
@@ -87,6 +103,12 @@ def collect(page, rows, out_dir):
                 page.goto(channel_url(item['id']), timeout=45000)
                 attachment = page.locator('.MessageList .File.interactive').filter(has_text=item['filename']).first
                 attachment.wait_for(timeout=45000)
+                posted = None
+                if item['publication'] == 'Financial Times':
+                    try:
+                        posted = upload_date(page, item['id'])
+                    except Exception:
+                        pass  # Explicit header date can still establish the issue.
                 attachment.click(button='right')
                 with page.expect_download(timeout=90000) as pending:
                     page.get_by_role('menuitem', name='Download', exact=True).click()
@@ -107,18 +129,26 @@ def collect(page, rows, out_dir):
                     raise ValueError('scan_ocr_failed')
                 key = item['issue_key']
                 actual_key = key
+                issue_basis = 'filename_candidate'
+                resolved_date = item['issue_date_candidate']
                 if not item['issue_date_candidate']:
                     front = re.sub(r'\s+', ' ', pages[0][1][:1600])
                     actual_date = issue_date(front, date.today())
+                    issue_basis = 'first_page_date_candidate'
+                    if not actual_date:
+                        actual_date = posted
+                        issue_basis = 'upload_date_estimate_user_authorized_may_differ_by_one_day'
                     if not actual_date:
                         raise ValueError('undated_issue_not_verified')
+                    resolved_date = actual_date.isoformat()
                     actual_key = 'financial-times:' + actual_date.isoformat()
                 entry = {'message_id': item['id'], 'sha256': digest,
                          'collected_at': datetime.now(timezone.utc).isoformat()}
                 if digest not in hashes and actual_key not in seen:
                     passages = select_passages(pages, budget=6000)
                     documents.append({'filename': item['filename'], 'publication_candidate': item['publication'],
-                        'issue_date_candidate': item['issue_date_candidate'],
+                        'issue_date_candidate': resolved_date, 'issue_date_basis': issue_basis,
+                        'posted_date': posted.isoformat() if posted else None,
                         'source': f'https://t.me/{CHANNEL}/{item["id"]}',
                         'ocr_low_text_pages_remaining': unread,
                         'passages': passages, 'pages_or_paragraphs': len(pages)})
@@ -158,7 +188,7 @@ def main():
     state = filter_state(json.loads(os.environ['TELEGRAM_WEB_STATE']))
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(storage_state=state, accept_downloads=True, locale='en-US')
+        context = browser.new_context(storage_state=state, accept_downloads=True, locale='en-US', timezone_id='Asia/Shanghai')
         page = context.new_page()
         rows = inventory(page)
         if os.environ.get('TELEGRAM_INVENTORY_ONLY') != 'true':

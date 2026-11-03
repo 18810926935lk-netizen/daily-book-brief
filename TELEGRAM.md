@@ -33,8 +33,11 @@ Only the successfully processed issue key/message ID/hash/time is saved in
 Subsequent runs skip a processed latest issue instead of downloading older backlogs.
 
 Undated FT UK/US/EU files in the latest adjacent upload group are treated as
-alternative editions provisionally. The first downloaded file must contain a
-parseable recent date in its first-page header area; otherwise it is skipped.
+alternative editions provisionally. Prefer a parseable date from the first-page
+header. Per owner instruction, if unavailable, use the public message upload date
+(Asia/Shanghai) as an explicitly labeled provisional issue date with possible
+one-day discrepancy. Missing both dates still causes a skip. This exception only
+applies to FT and does not turn unreadable content into usable source material.
 Filename dates and month-only day-01 keys are deduplication candidates, not verified
 publication dates. The summary must verify issue information from source text.
 Unknown filenames/dates are excluded rather than guessed. Daily byte limits are
