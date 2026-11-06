@@ -1,0 +1,52 @@
+{
+  "wsj:2026-11-05": {
+    "message_id": "31487",
+    "sha256": "9dff59e796185f6cb41dc584cb2cf1aaa98bb17eba8702edbe66dd64621ae24f",
+    "collected_at": "2026-11-06T02:01:32.116165+00:00"
+  },
+  "washington-post:2026-11-05": {
+    "message_id": "31493",
+    "sha256": "702b968ae5e54cbc390a6c1700cb6d8cb7b3d3ab43f78d9ec639764b7b4817d3",
+    "collected_at": "2026-11-06T02:01:48.924237+00:00"
+  },
+  "nytimes:2026-11-06": {
+    "message_id": "31510",
+    "sha256": "8194f91cbe608b2f14017f4a5d8135ccab641243ecb4374c70744844b7b429b1",
+    "collected_at": "2026-11-06T02:03:41.174933+00:00"
+  },
+  "economist:2026-11-07": {
+    "message_id": "31515",
+    "sha256": "41ce4614e564d251b1527675767fa2ee2fa5825d710f662f8e94db1322d8370f",
+    "collected_at": "2026-11-06T02:03:56.064332+00:00"
+  },
+  "financial-times:undated:31509": {
+    "message_id": "31508",
+    "sha256": "c0a4b93cc0ef5348e931fb4e185c8c0cc58892c7389e0b93205365c3d3effa79",
+    "collected_at": "2026-11-06T02:05:04.571681+00:00"
+  },
+  "financial-times:2026-11-06": {
+    "message_id": "31508",
+    "sha256": "c0a4b93cc0ef5348e931fb4e185c8c0cc58892c7389e0b93205365c3d3effa79",
+    "collected_at": "2026-11-06T02:05:04.571681+00:00"
+  },
+  "guardian:2026-11-06": {
+    "message_id": "31512",
+    "sha256": "5b156258ed42ad23b2ef497d8a58545ce4052eb3c5a24bd812ec7b5afbebe13d",
+    "collected_at": "2026-11-06T02:05:19.508180+00:00"
+  },
+  "new-yorker:2026-11-09": {
+    "message_id": "31381",
+    "sha256": "f02f889a81c84a964d50fc0a0cfbff0c8bdb015f83c326bb6e3e49180ce87df3",
+    "collected_at": "2026-11-06T02:05:33.979976+00:00"
+  },
+  "nyrb:2026-11-19": {
+    "message_id": "31230",
+    "sha256": "805dc556188d58331a5d5002fc3889397c174997f4ad17764339885b0479615c",
+    "collected_at": "2026-11-06T02:05:48.870508+00:00"
+  },
+  "tls:2026-10-16": {
+    "message_id": "30714",
+    "sha256": "6cec539bf103c8a09293ec6ce82f8cc801dc46ec2c92abae4dd5521a24793c3b",
+    "collected_at": "2026-11-06T02:06:03.694334+00:00"
+  }
+}
