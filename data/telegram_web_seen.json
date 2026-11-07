@@ -48,5 +48,15 @@
     "message_id": "30714",
     "sha256": "6cec539bf103c8a09293ec6ce82f8cc801dc46ec2c92abae4dd5521a24793c3b",
     "collected_at": "2026-11-06T02:06:03.694334+00:00"
+  },
+  "wsj:2026-11-06": {
+    "message_id": "31535",
+    "sha256": "f395c3d4e2f30d40e9e8e7e0858bcb62001c5a1f56e628cd9d3aead083839c2a",
+    "collected_at": "2026-11-07T01:41:14.697945+00:00"
+  },
+  "washington-post:2026-11-06": {
+    "message_id": "31540",
+    "sha256": "c2fe32938a7d38abe66d11ae352d8253684a0cefe8c131574285a372453e1ede",
+    "collected_at": "2026-11-07T01:41:30.904613+00:00"
   }
 }
