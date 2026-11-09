@@ -103,7 +103,10 @@ jobs:
           python-version: '3.11'
 
       - name: deps
-        run: pip install htmldocx requests
+        run: pip install htmldocx requests beautifulsoup4==4.14.3 markdownify==1.2.2 feedparser==6.0.12
+
+      - name: publication-tests
+        run: python -m unittest test_publication -v
 
       - name: telegram-deps
         if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
@@ -141,13 +144,9 @@ jobs:
           TZ: Asia/Shanghai
         run: |
           mkdir -p data site
+          python collect_editorial.py
           python collect.py lithub > data/lithub.txt 2>/dev/null || echo COLLECT_LITHUB_FAILED > data/lithub.txt
           python collect.py podcasts "The Daily" "Crime Junkie" "The Rest Is History" "SmartLess" "The Mel Robbins Podcast" "Stuff You Should Know" > data/podcasts.txt 2>/dev/null || echo COLLECT_PODCASTS_FAILED > data/podcasts.txt
-          python collect.py wikipedia "List_of_The_New_York_Times_number-one_books_of_2026" > data/wikipedia.txt 2>/dev/null || echo COLLECT_WIKI_FAILED > data/wikipedia.txt
-          python collect.py googlenews "Nobel Prize in Literature 2026 prediction OR odds OR favorite OR contender" > data/nobel_lit.txt 2>/dev/null || echo NOBEL_LIT_FAILED > data/nobel_lit.txt
-          python collect.py googlenews "Nobel memorial prize in economics 2026 prediction OR favorite OR frontrunner" > data/nobel_econ.txt 2>/dev/null || echo NOBEL_ECON_FAILED > data/nobel_econ.txt
-          python collect.py googlenews "literary fiction books authors prize award" > data/fallback_lit.txt 2>/dev/null || echo FALLBACK_LIT_FAILED > data/fallback_lit.txt
-          python collect.py googlenews "\"economics book\" 2026" > data/fallback_econ.txt 2>/dev/null || echo FALLBACK_ECON_FAILED > data/fallback_econ.txt
           python collect.py googlenews "\"Book Deals\" Publishers Weekly" > data/rights.txt 2>/dev/null || echo RIGHTS_FAILED > data/rights.txt
           python collect.py googlenews "publishing rights deal book auction" >> data/rights.txt 2>/dev/null || true
           echo "collected:"; wc -c data/*.txt
@@ -174,7 +173,8 @@ jobs:
         run: |
           git config user.name "brief-bot"
           git config user.email "brief-bot@users.noreply.github.com"
-          git add site/ data/ || true
+          git add site/ data/telegram*json
+          # Source excerpts remain private; commit only finished manuscripts and deduplication metadata.
           git commit -m "brief $(date +%F)" || echo "nothing to commit"
           git push
         env:

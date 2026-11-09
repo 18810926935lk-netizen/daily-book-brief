@@ -38,26 +38,17 @@ OCR识别可能把书名、人名、日期和数字读错；可疑字词不能�
 ===== 播客榜单头部节目最近单集（RSS核实，节目池：The Daily/Crime Junkie/The Rest Is History/SmartLess/The Mel Robbins Podcast/Stuff You Should Know）=====
 {read('data/podcasts.txt')}
 
-===== NYT 榜首书维基表（全年各榜榜首汇总，交叉验证，可能滞后到上月末）=====
-{read('data/wikipedia.txt', 40000)}
+===== 国际非虚构榜单核查（完整榜单由程序插入，勿改写）=====
+{read('data/rankings.json', 30000)}
 
-===== 诺奖文学奖预测（谷歌新闻聚合，注意文件头标注的时间窗口）=====
-{read('data/nobel_lit.txt', 10000)}
-
-===== 诺奖经济学奖预测（谷歌新闻聚合）=====
-{read('data/nobel_econ.txt', 8000)}
-
-===== 文学圈近期报道（仅当文学奖小节无新预测时选读一篇）=====
-{read('data/fallback_lit.txt', 6000)}
-
-===== 经济学圈近期报道（仅当经济学奖小节无新预测时选读一篇）=====
-{read('data/fallback_econ.txt', 6000)}
+===== 多元文化/知识来源（注明RSS摘要或部分正文、原始日期与缺口）=====
+{read('data/editorial.json', 220000)}
 
 ===== 国际版权贸易报道（rights/交易/拍卖）=====
 {read('data/rights.txt', 10000)}
 
-===== 格式模板 sample.html（结构与内联样式照抄，内容全部替换为今日）=====
-{read('template/sample.html')}
+===== 格式模板 sample.html（仅参照样式，按照最新版栏目写作）=====
+{read('template/current.html')}
 
 按系统提示词的规范，输出今日简报的完整 HTML（```html 代码块）。只输出这一个代码块。"""
 
@@ -77,11 +68,11 @@ base = os.environ['GLM_BASE_URL'].rstrip('/')
 token = os.environ['GLM_TOKEN']
 
 def call(mt):
-    # 网络抖动/服务端错误重试：最多5次线性退避，避免单次断连导致当日断更（2026-09-19教训）
+    # 网络抖动/服务端错误重试：最多3次线性退避，避免单次断连导致当日断更（2026-09-19教训）
     last = 'no attempt'
-    for attempt in range(1, 6):
+    for attempt in range(1, 4):
         try:
-            r = requests.post(base + '/v1/messages', timeout=1800, headers={
+            r = requests.post(base + '/v1/messages', timeout=(20, 600), headers={
                 'x-api-key': token,
                 'authorization': 'Bearer ' + token,
                 'anthropic-version': '2023-06-01',
@@ -96,13 +87,13 @@ def call(mt):
                 return r
             last = f'HTTP {r.status_code}'
         except (ReqConnErr, Timeout) as e:
-            last = f'{type(e).__name__}: {str(e)[:200]}'
-        if attempt < 5:
+            last = type(e).__name__
+        if attempt < 3:
             print(f'attempt {attempt} failed ({last}), retry in {30 * attempt}s')
             time.sleep(30 * attempt)
         else:
             print(f'attempt {attempt} failed ({last}), giving up')
-    raise SystemExit(f'API_UNREACHABLE after 5 attempts, last: {last}')
+    raise SystemExit(f'API_UNREACHABLE after 3 attempts, last: {last}')
 
 # 30条条目+选题板块输出量大：优先 65536；端点若不接受则回退 32768
 r = call(65536)
@@ -124,15 +115,6 @@ html = m.group(1).strip()
 if '</html>' not in html:
     raise SystemExit('HTML_TRUNCATED (no </html>) len=' + str(len(html)))
 
-open(os.path.join(BASE, 'site', f'{TODAY}.html'), 'w', encoding='utf-8').write(html)
-
-issue = ''
-m2 = re.search(r'第(\d+)期', html)
-if m2:
-    issue = m2.group(1)
-index = f"""<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>图书信息简报</title><meta http-equiv="refresh" content="0; url={TODAY}.html">
-</head><body><p>最新一期：{TODAY}（第{issue or '?'}期），<a href="{TODAY}.html">点此阅读</a></p></body></html>"""
-open(os.path.join(BASE, 'site', 'index.html'), 'w', encoding='utf-8').write(index)
-print('GENERATED:', TODAY, 'issue', issue, 'len', len(html))
+from publication import publish
+manifest = publish(html, BASE, TODAY, os.environ.get('TELEGRAM_SOURCE', 'telegram-private/source.json'))
+print('GENERATED:', TODAY, 'revision', manifest['revision'], 'ranking', manifest['ranking_status'], 'telegram', manifest['telegram'])

@@ -9,26 +9,30 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 key = os.environ.get('SERVERCHAN_KEY', '')
 site_base = os.environ.get('SITE_BASE', '').rstrip('/')
 
-html_path = os.path.join(BASE, 'site', f'{TODAY}.html')
-if not os.path.exists(html_path):
-    raise SystemExit('ERROR: 今日 HTML 不存在，推送失败')
-
+from publication import digest
+manifest = json.loads(open(os.path.join(BASE, 'site', TODAY + '.json'), encoding='utf-8').read())
+if manifest['date'] != TODAY:
+    raise SystemExit('ERROR: manifest date mismatch')
+html_path = os.path.join(BASE, 'site', manifest['html'])
 html = open(html_path, encoding='utf-8').read()
+if digest(html.encode('utf-8')) != manifest['html_sha256']:
+    raise SystemExit('ERROR: manuscript hash mismatch')
 plain = re.sub(r'<[^>]+>', ' ', html)
 plain = re.sub(r'\s+', ' ', plain)
 
 # 摘要：报头日期段 + 每个栏目标题行
 issue = (re.search(r'第(\d+)期', plain) or [None, '?'])[1]
-title = f'📖 图书信息简报 {TODAY}（第{issue}期）'
+title = f'📖 全球图书与文化简报 {TODAY}'
 
-heads = re.findall(r'[一二三四五六七八]、[^ ]{2,20}', plain)[:7]
-url = f'{site_base}/{TODAY}.html' if site_base else '(SITE_BASE 未配置)'
+from bs4 import BeautifulSoup
+heads = [h.get_text(' ', strip=True) for h in BeautifulSoup(html, 'html.parser').select('h2')][:9]
+url = f"{site_base}/{manifest['html']}" if site_base else '(SITE_BASE 未配置)'
 
-desp = f"""**今日简报已生成** [点此阅读全文]({url})
+desp = f"""**今日简报已生成**（版本 {manifest['revision']}） [点此阅读全文]({url})
 
 """ + '\n'.join('- ' + h.strip() for h in heads) + f"""
 
-（每日 06:00 自动生成 · 大愚文化）"""
+（每日计划北京时间06:00启动；实际发布时间以成稿为准 · 大愚文化）"""
 
 if not key or 'SERVERCHAN' in key:
     raise SystemExit('ERROR: SERVERCHAN_KEY 未配置')
@@ -41,7 +45,7 @@ import time
 for attempt in range(30):
     try:
         page = requests.get(url, timeout=20)
-        if page.status_code == 200 and page.content == html.encode('utf-8'):
+        if page.status_code == 200 and page.content == html.encode('utf-8') and requests.get(f'{site_base}/{TODAY}.json', timeout=20).json() == manifest:
             break
     except requests.RequestException:
         pass
