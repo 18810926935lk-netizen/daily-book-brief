@@ -1,3 +1,2 @@
-# window: 过去48小时 | items: 1
-[2026-11-07] Book Deals: Week of November 9, 2026 - Publishers Weekly (Publishers Weekly) || https://news.google.com/rss/articles/CBMiwgFBVV95cUxNVl9SSFc4aGZUNHVKWTlpcmthZ3BwdlBhLVR0RmhtWTJReWlSMXZzd0VsS0xhbmJROHBfOTQtT2VFQ3ZwRTRwb3ZuMTlKaHllZkduSEhUemsyOUp5V3AxMXVIalM3UUNCQ19RYlN6YWxPajJwYXhzMnJtYUpPeHAxOHYxLU9pbG1OSjcyYjFNYWh3SXgwZXdHYTRJUHU2cGVzd1NJVWdITW9EVVB4M2NsNW91R0hmOWloVGtCM2NodHJBUQ?oc=5
+# window: 过去48小时 | items: 0
 # window: 过去48小时 | items: 0
