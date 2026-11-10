@@ -29,6 +29,11 @@ on:
         type: boolean
         default: false
 
+      telegram_priority_only:
+        description: 'Retry and diagnose only WSJ and NYT attachment downloads; no publication or notification'
+        type: boolean
+        default: false
+
 permissions:
   contents: write
 
@@ -121,13 +126,14 @@ jobs:
 
       - name: telegram-source
         id: telegram
-        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
+        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true || inputs.telegram_priority_only == true
         continue-on-error: true
         timeout-minutes: 25
         env:
           TELEGRAM_AUTH_JSON: ${{ secrets.TELEGRAM_AUTH_JSON }}
           TELEGRAM_WEB_STATE: ${{ secrets.TELEGRAM_WEB_STATE }}
           TELEGRAM_WORK_DIR: ${{ runner.temp }}/telegram-private
+          TELEGRAM_PRIORITY_ONLY: ${{ inputs.telegram_priority_only }}
         run: |
           if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python telegram_web_source.py; else python telegram_source.py; fi
 
@@ -139,7 +145,7 @@ jobs:
         run: test "$TELEGRAM_OUTCOME" = success
 
       - name: collect
-        if: inputs.telegram_only != true
+        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
         env:
           TZ: Asia/Shanghai
         run: |
@@ -152,7 +158,7 @@ jobs:
           echo "collected:"; wc -c data/*.txt
 
       - name: generate
-        if: inputs.telegram_only != true
+        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
         env:
           TELEGRAM_SOURCE: ${{ runner.temp }}/telegram-private/source.json
           GLM_BASE_URL: ${{ secrets.GLM_BASE_URL }}
@@ -161,7 +167,7 @@ jobs:
         run: python gen_brief.py
 
       - name: docx
-        if: inputs.telegram_only != true
+        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
         run: |
           D=$(date +%F)
           python make_docx.py "site/${D}.html" "site/${D}.docx" || echo "WARN: docx failed, continue"
@@ -169,7 +175,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: publish
-        if: inputs.telegram_only != true
+        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
         run: |
           git config user.name "brief-bot"
           git config user.email "brief-bot@users.noreply.github.com"
@@ -181,7 +187,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: notify
-        if: inputs.telegram_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           SITE_BASE: ${{ vars.SITE_BASE }}
@@ -190,7 +196,7 @@ jobs:
 
       # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
       - name: notify-failure
-        if: failure() && inputs.telegram_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: failure() && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TZ: Asia/Shanghai
