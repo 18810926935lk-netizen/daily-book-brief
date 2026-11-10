@@ -114,7 +114,7 @@ jobs:
         run: python -m unittest test_publication -v
 
       - name: telegram-deps
-        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true
+        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true || inputs.telegram_priority_only == true
         continue-on-error: true
         run: |
           pip install -r requirements-telegram.txt playwright==1.56.0
@@ -138,7 +138,7 @@ jobs:
           if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python telegram_web_source.py; else python telegram_source.py; fi
 
       - name: telegram-check
-        if: inputs.telegram_only == true
+        if: inputs.telegram_only == true || inputs.telegram_priority_only == true
         env:
           TELEGRAM_ENABLED: ${{ vars.TELEGRAM_ENABLED }}
           TELEGRAM_OUTCOME: ${{ steps.telegram.outcome }}
