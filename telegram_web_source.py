@@ -76,11 +76,33 @@ def upload_date(page, message_id):
     return None
 
 
+
+def locate_attachment(page, item):
+    """Locate a Telegram attachment by its stable message ID, then filename fallback."""
+    from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+    message_selector = f'.MessageList [data-message-id="{int(item["id"])}"] .File.interactive'
+    by_message = page.locator(message_selector).first
+    try:
+        by_message.wait_for(state='visible', timeout=90000)
+        by_message.scroll_into_view_if_needed(timeout=20000)
+        return by_message, 'message_id'
+    except PlaywrightTimeoutError:
+        # Some WebA builds virtualize message rows and omit the data-message wrapper
+        # after deep-link navigation. Keep a bounded filename fallback for those builds.
+        by_name = page.locator('.MessageList .File.interactive').filter(has_text=item['filename']).first
+        by_name.wait_for(state='visible', timeout=30000)
+        by_name.scroll_into_view_if_needed(timeout=20000)
+        return by_name, 'filename_fallback'
+
+
 def collect(page, rows, out_dir):
     state_path = Path(__file__).parent / 'data/telegram_web_seen.json'
     seen = json.loads(state_path.read_text()) if state_path.exists() else {}
     groups = select_issues(rows, seen, date.today())
     documents, skipped = [], []
+    archive_path = Path(__file__).parent / 'data/telegram_web_archive_index.json'
+    archive = json.loads(archive_path.read_text(encoding='utf-8')) if archive_path.exists() else {'schema_version': 1, 'items': []}
+    archived_hashes = {x.get('sha256') for x in archive.get('items', [])}
     total = 0
     deadline = time.monotonic() + 1200
     hashes = {v['sha256'] for v in seen.values()}
@@ -99,20 +121,28 @@ def collect(page, rows, out_dir):
             path = out_dir / (item['id'] + Path(item['filename']).suffix.lower())
             try:
                 # WebA consumes tgaddr on initial load, not subsequent hash navigation.
+                stage = 'navigate_to_message'
                 page.goto('about:blank')
-                page.goto(channel_url(item['id']), timeout=45000)
-                attachment = page.locator('.MessageList .File.interactive').filter(has_text=item['filename']).first
-                attachment.wait_for(timeout=45000)
+                page.goto(channel_url(item['id']), timeout=90000, wait_until='domcontentloaded')
+                stage = 'locate_attachment'
+                attachment, locator_mode = locate_attachment(page, item)
+                print(f'TELEGRAM_DIAGNOSTIC: publication={item["publication"]}; message={item["id"]}; stage=attachment_found; locator={locator_mode}; url_host={page.url.split("/")[2] if "/" in page.url else "unknown"}', flush=True)
                 posted = None
                 if item['publication'] == 'Financial Times':
                     try:
                         posted = upload_date(page, item['id'])
                     except Exception:
                         pass  # Explicit header date can still establish the issue.
-                attachment.click(button='right')
-                with page.expect_download(timeout=90000) as pending:
-                    page.get_by_role('menuitem', name='Download', exact=True).click()
+                stage = 'open_context_menu'
+                attachment.click(button='right', timeout=30000)
+                stage = 'wait_download_menu'
+                menu_item = page.get_by_role('menuitem', name='Download', exact=True)
+                menu_item.wait_for(state='visible', timeout=30000)
+                stage = 'click_download_and_wait_event'
+                with page.expect_download(timeout=120000) as pending:
+                    menu_item.click(timeout=30000)
                 download = pending.value
+                stage = 'download_completion'
                 if download.failure():
                     raise RuntimeError('download_failed')
                 download.save_as(path)
@@ -144,6 +174,14 @@ def collect(page, rows, out_dir):
                     actual_key = 'financial-times:' + actual_date.isoformat()
                 entry = {'message_id': item['id'], 'sha256': digest,
                          'collected_at': datetime.now(timezone.utc).isoformat()}
+                if digest not in archived_hashes:
+                    archive['items'].append({'publication': item['publication'],
+                        'filename': item['filename'], 'message_id': item['id'],
+                        'issue_key': actual_key, 'issue_date': resolved_date,
+                        'issue_date_basis': issue_basis, 'source': f'https://t.me/{CHANNEL}/{item["id"]}',
+                        'sha256': digest, 'collected_at': entry['collected_at'],
+                        'pages': len(pages), 'ocr_low_text_pages_remaining': unread})
+                    archived_hashes.add(digest)
                 if digest not in hashes and actual_key not in seen:
                     passages = select_passages(pages, budget=6000)
                     documents.append({'filename': item['filename'], 'publication_candidate': item['publication'],
@@ -161,8 +199,9 @@ def collect(page, rows, out_dir):
                 reason = str(exc) if str(exc) in {
                     'download_failed', 'file_size_exceeds_limit', 'scan_ocr_failed',
                     'undated_issue_not_verified'} else type(exc).__name__
-                skipped.append({'message_id': item['id'], 'reason': reason})
-                print(f'SKIPPED: {item["publication"]}; message={item["id"]}; reason={reason}', flush=True)
+                failed_stage = locals().get('stage', 'unknown')
+                skipped.append({'message_id': item['id'], 'reason': reason, 'stage': failed_stage})
+                print(f'SKIPPED: {item["publication"]}; message={item["id"]}; reason={reason}; stage={failed_stage}', flush=True)
             finally:
                 path.unlink(missing_ok=True)
     payload = {'channel': CHANNEL, 'documents': documents, 'skipped': skipped,
@@ -175,6 +214,10 @@ def collect(page, rows, out_dir):
         raise RuntimeError('no_readable_documents')
     if skipped:
         print('::warning::Some Telegram attachments could not be processed; source payload contains explicit skips.')
+    # Durable catalog contains bibliographic/provenance metadata only; no PDFs or full text.
+    archive['items'].sort(key=lambda x: (x.get('publication', ''), x.get('issue_date') or '', x.get('message_id', '')))
+    archive_path.parent.mkdir(exist_ok=True)
+    archive_path.write_text(json.dumps(archive, ensure_ascii=False, indent=2), encoding='utf-8')
     # Only IDs, issue keys and hashes go into git after successful normal publication.
     state_path.parent.mkdir(exist_ok=True)
     state_path.write_text(json.dumps(seen, indent=2), encoding='utf-8')
