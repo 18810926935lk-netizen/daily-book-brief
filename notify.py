@@ -32,7 +32,7 @@ desp = f"""**今日简报已生成**（版本 {manifest['revision']}） [点此�
 
 """ + '\n'.join('- ' + h.strip() for h in heads) + f"""
 
-（每日计划北京时间06:00启动；实际发布时间以成稿为准 · 大愚文化）"""
+（每日计划北京时间04:30启动，目标06:00前发布；实际发布时间以成稿为准 · 大愚文化）"""
 
 if not key or 'SERVERCHAN' in key:
     raise SystemExit('ERROR: SERVERCHAN_KEY 未配置')
