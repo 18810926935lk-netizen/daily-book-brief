@@ -1,7 +1,7 @@
 name: daily-brief
 on:
   schedule:
-    - cron: '0 22 * * *'   # UTC 22:00 = 北京时间 06:00
+    - cron: '30 20 * * *'   # UTC 20:30 = 北京时间 04:30；预留生成、校验、发布与微信通知时间，确保06:00前就绪
   workflow_dispatch:
     inputs:
       send_notification:
