@@ -234,6 +234,13 @@ def main():
         context = browser.new_context(storage_state=state, accept_downloads=True, locale='en-US', timezone_id='Asia/Shanghai')
         page = context.new_page()
         rows = inventory(page)
+        if os.environ.get('TELEGRAM_PRIORITY_ONLY') == 'true':
+            from telegram_publications import classify
+            rows = [row for row in rows if (classify(row, date.today()) or {}).get('publication') in
+                    ('The Wall Street Journal', 'The New York Times', 'The New York Times Book Review')]
+            print(f'PRIORITY_DIAGNOSTIC: WSJ_NYT_candidates={len(rows)}', flush=True)
+            if not rows:
+                raise RuntimeError('no_priority_attachments_found')
         if os.environ.get('TELEGRAM_INVENTORY_ONLY') != 'true':
             collect(page, rows, out_dir)
         browser.close()
