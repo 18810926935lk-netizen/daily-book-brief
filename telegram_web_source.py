@@ -95,6 +95,45 @@ def locate_attachment(page, item):
         return by_name, 'filename_fallback'
 
 
+
+def download_attachment(page, item):
+    """Download one attachment, retrying WSJ/NYT with a fresh deep link per attempt."""
+    from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+    priority = item.get('publication') in ('The Wall Street Journal', 'The New York Times', 'The New York Times Book Review')
+    attempts = 3 if priority else 1
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        stage = 'navigate_to_message'
+        try:
+            page.goto('about:blank')
+            page.goto(channel_url(item['id']), timeout=90000, wait_until='domcontentloaded')
+            stage = 'locate_attachment'
+            attachment, locator_mode = locate_attachment(page, item)
+            print(f'TELEGRAM_DIAGNOSTIC: publication={item["publication"]}; message={item["id"]}; attempt={attempt}/{attempts}; stage=attachment_found; locator={locator_mode}', flush=True)
+            stage = 'open_context_menu'
+            attachment.click(button='right', timeout=30000)
+            stage = 'wait_download_menu'
+            menu_item = page.get_by_role('menuitem', name='Download', exact=True)
+            menu_item.wait_for(state='visible', timeout=30000)
+            stage = 'click_download_and_wait_event'
+            with page.expect_download(timeout=120000) as pending:
+                menu_item.click(timeout=30000)
+            stage = 'download_completion'
+            download = pending.value
+            if download.failure():
+                raise RuntimeError('download_failed')
+            return download, locator_mode
+        except PlaywrightTimeoutError as exc:
+            last_error = exc
+            print(f'TELEGRAM_DIAGNOSTIC: publication={item["publication"]}; message={item["id"]}; attempt={attempt}/{attempts}; failed_stage={stage}; error=TimeoutError', flush=True)
+            if attempt >= attempts:
+                raise
+            try:
+                page.goto('about:blank', timeout=15000)
+            except Exception:
+                pass
+    raise last_error
+
 def collect(page, rows, out_dir):
     state_path = Path(__file__).parent / 'data/telegram_web_seen.json'
     seen = json.loads(state_path.read_text()) if state_path.exists() else {}
@@ -120,31 +159,16 @@ def collect(page, rows, out_dir):
             total += size
             path = out_dir / (item['id'] + Path(item['filename']).suffix.lower())
             try:
-                # WebA consumes tgaddr on initial load, not subsequent hash navigation.
-                stage = 'navigate_to_message'
-                page.goto('about:blank')
-                page.goto(channel_url(item['id']), timeout=90000, wait_until='domcontentloaded')
-                stage = 'locate_attachment'
-                attachment, locator_mode = locate_attachment(page, item)
-                print(f'TELEGRAM_DIAGNOSTIC: publication={item["publication"]}; message={item["id"]}; stage=attachment_found; locator={locator_mode}; url_host={page.url.split("/")[2] if "/" in page.url else "unknown"}', flush=True)
+                stage = 'download_attachment'
+                download, locator_mode = download_attachment(page, item)
+                stage = 'download_completion'
                 posted = None
                 if item['publication'] == 'Financial Times':
                     try:
                         posted = upload_date(page, item['id'])
                     except Exception:
                         pass  # Explicit header date can still establish the issue.
-                stage = 'open_context_menu'
-                attachment.click(button='right', timeout=30000)
-                stage = 'wait_download_menu'
-                menu_item = page.get_by_role('menuitem', name='Download', exact=True)
-                menu_item.wait_for(state='visible', timeout=30000)
-                stage = 'click_download_and_wait_event'
-                with page.expect_download(timeout=120000) as pending:
-                    menu_item.click(timeout=30000)
-                download = pending.value
-                stage = 'download_completion'
-                if download.failure():
-                    raise RuntimeError('download_failed')
+                print(f'TELEGRAM_DIAGNOSTIC: publication={item["publication"]}; message={item["id"]}; locator={locator_mode}; result=download_event_received', flush=True)
                 download.save_as(path)
                 if path.stat().st_size > 60*1024**2:
                     raise ValueError('file_size_exceeds_limit')
