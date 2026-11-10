@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "items": [
+    {
+      "publication": "The Washington Post",
+      "filename": null,
+      "message_id": "31629",
+      "issue_key": "washington-post:2026-11-09",
+      "issue_date": "2026-11-09",
+      "issue_date_basis": "filename_candidate_unverified_in_archive_seed",
+      "source": "https://t.me/demagazinesharing/31629",
+      "sha256": null,
+      "collected_at": "2026-11-10",
+      "pages": 44,
+      "ocr_low_text_pages_remaining": 0,
+      "archive_note": "Seeded from the published 2026-11-10 brief; source filename/hash were not retained in the published record."
+    },
+    {
+      "publication": "Financial Times",
+      "filename": null,
+      "message_id": "31640",
+      "issue_key": "financial-times:2026-11-10",
+      "issue_date": "2026-11-10",
+      "issue_date_basis": "first_page_date_candidate_as_reported_in_published_brief",
+      "source": "https://t.me/demagazinesharing/31640",
+      "sha256": null,
+      "collected_at": "2026-11-10",
+      "pages": 24,
+      "ocr_low_text_pages_remaining": null,
+      "archive_note": "Seeded from the published 2026-11-10 brief; OCR risk was noted and source filename/hash were not retained."
+    },
+    {
+      "publication": "The Guardian",
+      "filename": null,
+      "message_id": "31615",
+      "issue_key": "guardian:2026-11-09",
+      "issue_date": "2026-11-09",
+      "issue_date_basis": "filename_candidate_as_reported_in_published_brief",
+      "source": "https://t.me/demagazinesharing/31615",
+      "sha256": null,
+      "collected_at": "2026-11-10",
+      "pages": 44,
+      "ocr_low_text_pages_remaining": 0,
+      "archive_note": "Seeded from the published 2026-11-10 brief; source filename/hash were not retained."
+    }
+  ]
+}
