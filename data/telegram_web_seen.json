@@ -93,5 +93,25 @@
     "message_id": "31609",
     "sha256": "4aca3a4b0bf58b1dc59ad83fa58e22186c8f72077ac42ef9f64ff4a8b7def9b2",
     "collected_at": "2026-11-09T01:33:50.327005+00:00"
+  },
+  "washington-post:2026-11-09": {
+    "message_id": "31629",
+    "sha256": "b44ae8fd535e5cfe715eaa8e08fafff20b3c956827e66baefed26ad12232c11f",
+    "collected_at": "2026-11-10T04:05:41.458684+00:00"
+  },
+  "financial-times:undated:31640": {
+    "message_id": "31640",
+    "sha256": "f3ce448986755b351f11587ec83da73c877ac75cf240afd5d0291694d9ffaf48",
+    "collected_at": "2026-11-10T04:12:31.186784+00:00"
+  },
+  "financial-times:2026-11-10": {
+    "message_id": "31640",
+    "sha256": "f3ce448986755b351f11587ec83da73c877ac75cf240afd5d0291694d9ffaf48",
+    "collected_at": "2026-11-10T04:12:31.186784+00:00"
+  },
+  "guardian:2026-11-09": {
+    "message_id": "31615",
+    "sha256": "cb5e14d3f10ac277ef789a90c111f7755c364e36fea60ab4431fc0be6e30296a",
+    "collected_at": "2026-11-10T04:13:36.407212+00:00"
   }
 }
