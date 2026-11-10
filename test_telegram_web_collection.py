@@ -55,6 +55,16 @@ class CollectionTests(unittest.TestCase):
                 source.collect(page, rows, root)
                 self.assertEqual(download.save_as.call_count, 1)
 
+    def test_locate_attachment_prefers_stable_message_id(self):
+        from telegram_web_source import locate_attachment
+        page = MagicMock()
+        message_locator = page.locator.return_value.first
+        item = {'id': '31628', 'filename': 'The Wall Street Journal.pdf'}
+        locator, mode = locate_attachment(page, item)
+        self.assertEqual(mode, 'message_id')
+        self.assertIs(locator, message_locator)
+        message_locator.scroll_into_view_if_needed.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()
