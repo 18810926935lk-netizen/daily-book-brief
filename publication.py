@@ -77,8 +77,8 @@ def validate_html(html):
             raise ValueError('active_attribute_not_allowed')
         for attr in ('href', 'src'):
             value = el.get(attr, '')
-            if value and not value.startswith(('https://', '#')):
-                raise ValueError('non_public_link')
+            if value and not value.startswith(('https://', 'http://', '#')):
+                raise ValueError('non_public_link: ' + value[:200])
 
 
 def publish(html, base, date, telegram_path):
