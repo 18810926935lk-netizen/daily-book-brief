@@ -2,20 +2,6 @@
   "schema_version": 1,
   "items": [
     {
-      "publication": "The Washington Post",
-      "filename": null,
-      "message_id": "31629",
-      "issue_key": "washington-post:2026-11-09",
-      "issue_date": "2026-11-09",
-      "issue_date_basis": "filename_candidate_unverified_in_archive_seed",
-      "source": "https://t.me/demagazinesharing/31629",
-      "sha256": null,
-      "collected_at": "2026-11-10",
-      "pages": 44,
-      "ocr_low_text_pages_remaining": 0,
-      "archive_note": "Seeded from the published 2026-11-10 brief; source filename/hash were not retained in the published record."
-    },
-    {
       "publication": "Financial Times",
       "filename": null,
       "message_id": "31640",
@@ -42,6 +28,72 @@
       "pages": 44,
       "ocr_low_text_pages_remaining": 0,
       "archive_note": "Seeded from the published 2026-11-10 brief; source filename/hash were not retained."
+    },
+    {
+      "publication": "The Guardian",
+      "filename": "The Guardian UK_1011.pdf",
+      "message_id": "31646",
+      "issue_key": "guardian:2026-11-10",
+      "issue_date": "2026-11-10",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31646",
+      "sha256": "2a0d9709fd00c9aa1acb7beadf19db962c4a80a914e9a20a3104cfc33aaa5499",
+      "collected_at": "2026-11-11T04:50:04.570921+00:00",
+      "pages": 40,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The New York Times",
+      "filename": "NYT International 1111.pdf",
+      "message_id": "31677",
+      "issue_key": "nytimes:2026-11-11",
+      "issue_date": "2026-11-11",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31677",
+      "sha256": "12eccbe54cf10a02f408fc09813e20582e8100a94687869ae08f213c8e7ab9e3",
+      "collected_at": "2026-11-11T04:43:55.504296+00:00",
+      "pages": 16,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The New Yorker",
+      "filename": "The New Yorker_1611.pdf",
+      "message_id": "31634",
+      "issue_key": "new-yorker:2026-11-16",
+      "issue_date": "2026-11-16",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31634",
+      "sha256": "abffebcce2ffa982f0feaaaf46b19425898fc2b3cbf8ad728454984cbe8f5587",
+      "collected_at": "2026-11-11T04:50:18.226000+00:00",
+      "pages": 74,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - November 10, 2026.pdf",
+      "message_id": "31670",
+      "issue_key": "wsj:2026-11-10",
+      "issue_date": "2026-11-10",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31670",
+      "sha256": "b85dee7aae751f0a6be3234b24b18bde94c64d1579e7b80ec3ba840849e63468",
+      "collected_at": "2026-11-11T04:40:48.273133+00:00",
+      "pages": 28,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": null,
+      "message_id": "31629",
+      "issue_key": "washington-post:2026-11-09",
+      "issue_date": "2026-11-09",
+      "issue_date_basis": "filename_candidate_unverified_in_archive_seed",
+      "source": "https://t.me/demagazinesharing/31629",
+      "sha256": null,
+      "collected_at": "2026-11-10",
+      "pages": 44,
+      "ocr_low_text_pages_remaining": 0,
+      "archive_note": "Seeded from the published 2026-11-10 brief; source filename/hash were not retained in the published record."
     }
   ]
 }
