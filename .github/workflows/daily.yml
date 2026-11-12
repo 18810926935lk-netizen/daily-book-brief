@@ -1,5 +1,9 @@
 name: daily-brief
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-now'
   schedule:
     # 三次冗余触发提前到北京时间零点后，为 GitHub schedule 可能出现的数小时延迟留出余量。
     # 后续触发若发现当天已发布，会由 preflight 自动跳过生成与通知。
@@ -207,7 +211,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: notify
-        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || github.event_name == 'push' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           SITE_BASE: ${{ vars.SITE_BASE }}
@@ -216,7 +220,7 @@ jobs:
 
       # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
       - name: notify-failure
-        if: failure() && steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: failure() && steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || github.event_name == 'push' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TZ: Asia/Shanghai
