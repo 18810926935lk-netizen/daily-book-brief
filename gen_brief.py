@@ -95,11 +95,21 @@ def call(mt):
             print(f'attempt {attempt} failed ({last}), giving up')
     raise SystemExit(f'API_UNREACHABLE after 3 attempts, last: {last}')
 
-# 30条条目+选题板块输出量大：优先 65536；端点若不接受则回退 32768
-r = call(65536)
-if r.status_code == 400 and 'max_tokens' in r.text:
-    print('max_tokens=65536 rejected, falling back to 32768...')
-    r = call(32768)
+# 30条条目+选题板块输出量大：优先 65536。素材较多时，兼容端点可能以
+# invalid_request 拒绝“输入+最大输出”超出上下文的请求；逐级降低输出上限，
+# 但仍由 publication.py 的完整性、栏目与榜单校验把关，绝不发布截断稿。
+r = None
+for mt in (65536, 49152, 32768):
+    r = call(mt)
+    body = r.text.lower()
+    retryable_invalid_request = (
+        r.status_code == 400
+        and ('invalid_request' in body or 'invalid request' in body or 'max_tokens' in body)
+    )
+    if not retryable_invalid_request:
+        break
+    if mt != 32768:
+        print(f'max_tokens={mt} rejected as invalid_request; retrying with a lower output ceiling...')
 print('API_DIAG:', r.headers.get('Content-Type', ''), [(k, k in r.text.lower()) for k in ('invalid api key','invalid_api_key','invalid request','invalid_request','invalid x-api-key','invalid authentication','unauthorized','authentication_error','invalid credentials','stream','max_tokens','upstream','proxy','session','overloaded','error')]) if not r.ok else None; r.raise_for_status()
 data = r.json()
 if data.get('type') == 'error':
