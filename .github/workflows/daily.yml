@@ -1,7 +1,10 @@
 name: daily-brief
 on:
   schedule:
-    - cron: '30 20 * * *'   # UTC 20:30 = 北京时间 04:30；预留生成、校验、发布与微信通知时间，确保06:00前就绪
+    # 三次冗余触发：GitHub schedule 可能延迟；后续触发若发现当天已发布会自动跳过。
+    - cron: '30 18 * * *'   # 北京时间 02:30
+    - cron: '30 19 * * *'   # 北京时间 03:30
+    - cron: '30 20 * * *'   # 北京时间 04:30
   workflow_dispatch:
     inputs:
       send_notification:
@@ -103,18 +106,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: preflight
+        id: preflight
+        env:
+          TZ: Asia/Shanghai
+        run: |
+          D=$(date +%F)
+          if test -f "site/${D}.json"; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+            echo "site/${D}.json already exists; skip duplicate generation and notification"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.preflight.outputs.already_published != 'true'
         with:
           python-version: '3.11'
 
       - name: deps
+        if: steps.preflight.outputs.already_published != 'true'
         run: pip install htmldocx requests beautifulsoup4==4.14.3 markdownify==1.2.2 feedparser==6.0.12
 
       - name: publication-tests
+        if: steps.preflight.outputs.already_published != 'true'
         run: python -m unittest test_publication -v
 
       - name: telegram-deps
-        if: vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true || inputs.telegram_priority_only == true
+        if: steps.preflight.outputs.already_published != 'true' && (vars.TELEGRAM_ENABLED == 'true' || inputs.telegram_only == true || inputs.telegram_priority_only == true)
         continue-on-error: true
         run: |
           pip install -r requirements-telegram.txt playwright==1.56.0
@@ -138,14 +157,14 @@ jobs:
           if [ "${{ vars.TELEGRAM_SOURCE_MODE }}" = web ]; then python telegram_web_source.py; else python telegram_source.py; fi
 
       - name: telegram-check
-        if: inputs.telegram_only == true || inputs.telegram_priority_only == true
+        if: steps.preflight.outputs.already_published != 'true' && (inputs.telegram_only == true || inputs.telegram_priority_only == true)
         env:
           TELEGRAM_ENABLED: ${{ vars.TELEGRAM_ENABLED }}
           TELEGRAM_OUTCOME: ${{ steps.telegram.outcome }}
         run: test "$TELEGRAM_OUTCOME" = success
 
       - name: collect
-        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
+        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true
         env:
           TZ: Asia/Shanghai
         run: |
@@ -158,7 +177,7 @@ jobs:
           echo "collected:"; wc -c data/*.txt
 
       - name: generate
-        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
+        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true
         env:
           TELEGRAM_SOURCE: ${{ runner.temp }}/telegram-private/source.json
           GLM_BASE_URL: ${{ secrets.GLM_BASE_URL }}
@@ -167,7 +186,7 @@ jobs:
         run: python gen_brief.py
 
       - name: docx
-        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
+        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true
         run: |
           D=$(date +%F)
           python make_docx.py "site/${D}.html" "site/${D}.docx" || echo "WARN: docx failed, continue"
@@ -175,7 +194,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: publish
-        if: inputs.telegram_only != true && inputs.telegram_priority_only != true
+        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true
         run: |
           git config user.name "brief-bot"
           git config user.email "brief-bot@users.noreply.github.com"
@@ -187,7 +206,7 @@ jobs:
           TZ: Asia/Shanghai
 
       - name: notify
-        if: inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           SITE_BASE: ${{ vars.SITE_BASE }}
@@ -196,7 +215,7 @@ jobs:
 
       # 任一步骤失败也要推送告警，避免无声断更（2026-09-19教训）
       - name: notify-failure
-        if: failure() && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
+        if: failure() && steps.preflight.outputs.already_published != 'true' && inputs.telegram_only != true && inputs.telegram_priority_only != true && (github.event_name == 'schedule' || inputs.send_notification == true)
         env:
           SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
           TZ: Asia/Shanghai
