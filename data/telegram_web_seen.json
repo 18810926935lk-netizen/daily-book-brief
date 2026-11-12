@@ -153,5 +153,35 @@
     "message_id": "31682",
     "sha256": "3a10463e4ade76eb915b7d6321087f5dcb2686d5459948b7a629217dfdfce7a3",
     "collected_at": "2026-11-12T01:23:41.819395+00:00"
+  },
+  "wsj:2026-11-12": {
+    "message_id": "31747",
+    "sha256": "9a147241f5d68b1041c179323668ff2761eff694177ff0adb5dcdb21c9ddea24",
+    "collected_at": "2026-11-12T22:49:04.739027+00:00"
+  },
+  "washington-post:2026-11-12": {
+    "message_id": "31748",
+    "sha256": "b5c30489f122cce0e44525145783f5ecf6ee99d37f65fd6bb7ef3f8dd0941d89",
+    "collected_at": "2026-11-12T22:49:18.721840+00:00"
+  },
+  "nytimes:2026-11-12": {
+    "message_id": "31707",
+    "sha256": "fa4c612c22290de843eda9f47ee5bfa168cefd4f9021a256b2afa8ac2a5b5df8",
+    "collected_at": "2026-11-12T22:49:58.312660+00:00"
+  },
+  "financial-times:undated:31712": {
+    "message_id": "31712",
+    "sha256": "d89bbb12f6a7791af577df714f9daedecb57730444ed616da985b385109b5061",
+    "collected_at": "2026-11-12T22:51:29.896991+00:00"
+  },
+  "financial-times:2026-11-12": {
+    "message_id": "31712",
+    "sha256": "d89bbb12f6a7791af577df714f9daedecb57730444ed616da985b385109b5061",
+    "collected_at": "2026-11-12T22:51:29.896991+00:00"
+  },
+  "guardian:2026-11-12": {
+    "message_id": "31741",
+    "sha256": "6078b3b131781210e71bc3f43edcdcb2391e998f43927ff21b1642fd0080ce73",
+    "collected_at": "2026-11-12T22:51:41.572652+00:00"
   }
 }
