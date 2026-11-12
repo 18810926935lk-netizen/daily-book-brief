@@ -133,5 +133,25 @@
     "message_id": "31634",
     "sha256": "abffebcce2ffa982f0feaaaf46b19425898fc2b3cbf8ad728454984cbe8f5587",
     "collected_at": "2026-11-11T04:50:18.226000+00:00"
+  },
+  "wsj:2026-11-11": {
+    "message_id": "31698",
+    "sha256": "8397de93c32925a5a86d4748a2f212621e2dc42357e75fa666ba282817c7326c",
+    "collected_at": "2026-11-12T01:17:00.803475+00:00"
+  },
+  "washington-post:2026-11-11": {
+    "message_id": "31700",
+    "sha256": "0e823cfa998683d6c7ca9ed4f03a8bc2bfb7da6071f726f1aa715da52bf38d68",
+    "collected_at": "2026-11-12T01:17:18.742306+00:00"
+  },
+  "financial-times:undated:31682": {
+    "message_id": "31682",
+    "sha256": "3a10463e4ade76eb915b7d6321087f5dcb2686d5459948b7a629217dfdfce7a3",
+    "collected_at": "2026-11-12T01:23:41.819395+00:00"
+  },
+  "financial-times:2026-11-11": {
+    "message_id": "31682",
+    "sha256": "3a10463e4ade76eb915b7d6321087f5dcb2686d5459948b7a629217dfdfce7a3",
+    "collected_at": "2026-11-12T01:23:41.819395+00:00"
   }
 }

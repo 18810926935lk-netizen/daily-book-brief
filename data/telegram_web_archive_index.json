@@ -16,6 +16,19 @@
       "archive_note": "Seeded from the published 2026-11-10 brief; OCR risk was noted and source filename/hash were not retained."
     },
     {
+      "publication": "Financial Times",
+      "filename": "FT UK.pdf",
+      "message_id": "31682",
+      "issue_key": "financial-times:2026-11-11",
+      "issue_date": "2026-11-11",
+      "issue_date_basis": "upload_date_estimate_user_authorized_may_differ_by_one_day",
+      "source": "https://t.me/demagazinesharing/31682",
+      "sha256": "3a10463e4ade76eb915b7d6321087f5dcb2686d5459948b7a629217dfdfce7a3",
+      "collected_at": "2026-11-12T01:23:41.819395+00:00",
+      "pages": 32,
+      "ocr_low_text_pages_remaining": 1
+    },
+    {
       "publication": "The Guardian",
       "filename": null,
       "message_id": "31615",
@@ -82,6 +95,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - November 11, 2026.pdf",
+      "message_id": "31698",
+      "issue_key": "wsj:2026-11-11",
+      "issue_date": "2026-11-11",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31698",
+      "sha256": "8397de93c32925a5a86d4748a2f212621e2dc42357e75fa666ba282817c7326c",
+      "collected_at": "2026-11-12T01:17:00.803475+00:00",
+      "pages": 30,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Washington Post",
       "filename": null,
       "message_id": "31629",
@@ -94,6 +120,19 @@
       "pages": 44,
       "ocr_low_text_pages_remaining": 0,
       "archive_note": "Seeded from the published 2026-11-10 brief; source filename/hash were not retained in the published record."
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 11, 2026.pdf",
+      "message_id": "31700",
+      "issue_key": "washington-post:2026-11-11",
+      "issue_date": "2026-11-11",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31700",
+      "sha256": "0e823cfa998683d6c7ca9ed4f03a8bc2bfb7da6071f726f1aa715da52bf38d68",
+      "collected_at": "2026-11-12T01:17:18.742306+00:00",
+      "pages": 52,
+      "ocr_low_text_pages_remaining": 0
     }
   ]
 }
