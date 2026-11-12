@@ -1,10 +1,11 @@
 name: daily-brief
 on:
   schedule:
-    # 三次冗余触发：GitHub schedule 可能延迟；后续触发若发现当天已发布会自动跳过。
-    - cron: '30 18 * * *'   # 北京时间 02:30
-    - cron: '30 19 * * *'   # 北京时间 03:30
-    - cron: '30 20 * * *'   # 北京时间 04:30
+    # 三次冗余触发提前到北京时间零点后，为 GitHub schedule 可能出现的数小时延迟留出余量。
+    # 后续触发若发现当天已发布，会由 preflight 自动跳过生成与通知。
+    - cron: '15 16 * * *'   # 北京时间 00:15
+    - cron: '45 16 * * *'   # 北京时间 00:45
+    - cron: '15 17 * * *'   # 北京时间 01:15
   workflow_dispatch:
     inputs:
       send_notification:
