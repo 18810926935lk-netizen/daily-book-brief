@@ -42,6 +42,32 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "Financial Times",
+      "filename": "FT US.pdf",
+      "message_id": "31777",
+      "issue_key": "financial-times:2026-11-13",
+      "issue_date": "2026-11-13",
+      "issue_date_basis": "upload_date_estimate_user_authorized_may_differ_by_one_day",
+      "source": "https://t.me/demagazinesharing/31777",
+      "sha256": "fd9e8fb64a7815f79ac609d1da3b24b629533bf5c347662fa11d24ede5bc7a70",
+      "collected_at": "2026-11-13T22:03:57.978571+00:00",
+      "pages": 34,
+      "ocr_low_text_pages_remaining": 5
+    },
+    {
+      "publication": "The Economist",
+      "filename": "The Economist (Web Edition)_1411.pdf",
+      "message_id": "31770",
+      "issue_key": "economist:2026-11-14",
+      "issue_date": "2026-11-14",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31770",
+      "sha256": "d9acf4c248703c7c147923fe44185f0df004464b35afb72f0d5746b1cacad935",
+      "collected_at": "2026-11-13T22:02:35.564240+00:00",
+      "pages": 347,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Guardian",
       "filename": null,
       "message_id": "31615",
@@ -82,6 +108,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Guardian",
+      "filename": "The Guardian UK_1311.pdf",
+      "message_id": "31782",
+      "issue_key": "guardian:2026-11-13",
+      "issue_date": "2026-11-13",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31782",
+      "sha256": "b125b193f1022557c7f6a895aaae7ba3b74e97991c7df0e21a7a6df30f47b894",
+      "collected_at": "2026-11-13T22:04:54.910974+00:00",
+      "pages": 44,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The New York Times",
       "filename": "NYT International 1111.pdf",
       "message_id": "31677",
@@ -105,6 +144,19 @@
       "sha256": "fa4c612c22290de843eda9f47ee5bfa168cefd4f9021a256b2afa8ac2a5b5df8",
       "collected_at": "2026-11-12T22:49:58.312660+00:00",
       "pages": 16,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The New York Times",
+      "filename": "NYT International 1311.pdf",
+      "message_id": "31772",
+      "issue_key": "nytimes:2026-11-13",
+      "issue_date": "2026-11-13",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31772",
+      "sha256": "d577d17df8a2690baa1444ea559707e250c137d106c4396d0820f2b16cff2153",
+      "collected_at": "2026-11-13T22:02:20.166847+00:00",
+      "pages": 20,
       "ocr_low_text_pages_remaining": 0
     },
     {
@@ -160,6 +212,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - November 13, 2026.pdf",
+      "message_id": "31795",
+      "issue_key": "wsj:2026-11-13",
+      "issue_date": "2026-11-13",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31795",
+      "sha256": "cf7b94e79c3a1cec51e59ff72891c0af3ed97c662c935233e19f99359644b6db",
+      "collected_at": "2026-11-13T22:00:52.313196+00:00",
+      "pages": 42,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Washington Post",
       "filename": null,
       "message_id": "31629",
@@ -197,6 +262,19 @@
       "sha256": "b5c30489f122cce0e44525145783f5ecf6ee99d37f65fd6bb7ef3f8dd0941d89",
       "collected_at": "2026-11-12T22:49:18.721840+00:00",
       "pages": 52,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 13, 2026.pdf",
+      "message_id": "31797",
+      "issue_key": "washington-post:2026-11-13",
+      "issue_date": "2026-11-13",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31797",
+      "sha256": "075b2e69ba99389a0637bbc498073d14d09d9e304803223a06ca786212600888",
+      "collected_at": "2026-11-13T22:01:09.884774+00:00",
+      "pages": 60,
       "ocr_low_text_pages_remaining": 0
     }
   ]
