@@ -55,6 +55,19 @@
       "ocr_low_text_pages_remaining": 5
     },
     {
+      "publication": "Financial Times",
+      "filename": "FT Magazine 1411.pdf",
+      "message_id": "31834",
+      "issue_key": "financial-times:2026-11-14",
+      "issue_date": "2026-11-14",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31834",
+      "sha256": "0ac0a44d963e95b7df8fe95cfa4c801dce40578660e1a9be90d2879c9a136782",
+      "collected_at": "2026-11-14T20:47:59.118966+00:00",
+      "pages": 48,
+      "ocr_low_text_pages_remaining": 12
+    },
+    {
       "publication": "The Economist",
       "filename": "The Economist (Web Edition)_1411.pdf",
       "message_id": "31770",
@@ -118,6 +131,19 @@
       "sha256": "b125b193f1022557c7f6a895aaae7ba3b74e97991c7df0e21a7a6df30f47b894",
       "collected_at": "2026-11-13T22:04:54.910974+00:00",
       "pages": 44,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Guardian",
+      "filename": "The Guardian UK_1411.pdf",
+      "message_id": "31817",
+      "issue_key": "guardian:2026-11-14",
+      "issue_date": "2026-11-14",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31817",
+      "sha256": "fd93fd74718628b221c7d76a489eaf3b63560be1e6ee620300855e0123d4c4f5",
+      "collected_at": "2026-11-14T20:48:23.456542+00:00",
+      "pages": 216,
       "ocr_low_text_pages_remaining": 0
     },
     {
@@ -225,6 +251,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - 14 November 2026.pdf",
+      "message_id": "31835",
+      "issue_key": "wsj:2026-11-14",
+      "issue_date": "2026-11-14",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31835",
+      "sha256": "d63195c413e6172fd963e66849a19f668e58eae04e1100583eeca7b57fdc6d5a",
+      "collected_at": "2026-11-14T20:45:42.467055+00:00",
+      "pages": 56,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Washington Post",
       "filename": null,
       "message_id": "31629",
@@ -275,6 +314,19 @@
       "sha256": "075b2e69ba99389a0637bbc498073d14d09d9e304803223a06ca786212600888",
       "collected_at": "2026-11-13T22:01:09.884774+00:00",
       "pages": 60,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 14, 2026.pdf",
+      "message_id": "31838",
+      "issue_key": "washington-post:2026-11-14",
+      "issue_date": "2026-11-14",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31838",
+      "sha256": "78df0f8db089f045af6722aede58f2a8c588f492d30bb9da41c2d2a793a35d74",
+      "collected_at": "2026-11-14T20:46:33.702042+00:00",
+      "pages": 36,
       "ocr_low_text_pages_remaining": 0
     }
   ]
