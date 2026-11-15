@@ -186,6 +186,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The New York Times",
+      "filename": "NYT Magazine 1511.pdf",
+      "message_id": "31849",
+      "issue_key": "nytimes:2026-11-15",
+      "issue_date": "2026-11-15",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31849",
+      "sha256": "8554dbc66e8caaa22f5eec485f7e3bcdfb29a8e8d2b2d1f1b94f5f9a377a0f14",
+      "collected_at": "2026-11-15T21:08:20.697336+00:00",
+      "pages": 56,
+      "ocr_low_text_pages_remaining": 7
+    },
+    {
       "publication": "The New Yorker",
       "filename": "The New Yorker_1611.pdf",
       "message_id": "31634",
@@ -327,6 +340,19 @@
       "sha256": "78df0f8db089f045af6722aede58f2a8c588f492d30bb9da41c2d2a793a35d74",
       "collected_at": "2026-11-14T20:46:33.702042+00:00",
       "pages": 36,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 15, 2026.pdf",
+      "message_id": "31864",
+      "issue_key": "washington-post:2026-11-15",
+      "issue_date": "2026-11-15",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31864",
+      "sha256": "8298cf9908d3497b386271a19a5e572fffba6d921b9cb19030383db3441137eb",
+      "collected_at": "2026-11-15T21:05:32.706178+00:00",
+      "pages": 73,
       "ocr_low_text_pages_remaining": 0
     }
   ]

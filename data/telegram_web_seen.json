@@ -238,5 +238,15 @@
     "message_id": "31817",
     "sha256": "fd93fd74718628b221c7d76a489eaf3b63560be1e6ee620300855e0123d4c4f5",
     "collected_at": "2026-11-14T20:48:23.456542+00:00"
+  },
+  "washington-post:2026-11-15": {
+    "message_id": "31864",
+    "sha256": "8298cf9908d3497b386271a19a5e572fffba6d921b9cb19030383db3441137eb",
+    "collected_at": "2026-11-15T21:05:32.706178+00:00"
+  },
+  "nytimes:2026-11-15": {
+    "message_id": "31849",
+    "sha256": "8554dbc66e8caaa22f5eec485f7e3bcdfb29a8e8d2b2d1f1b94f5f9a377a0f14",
+    "collected_at": "2026-11-15T21:08:20.697336+00:00"
   }
 }
