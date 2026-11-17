@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-18",
+  "revision": "378305ca07cbcf56",
+  "policy_version": "2026-11-09.1",
+  "generated_at": "2026-11-18T07:43:23.804927+08:00",
+  "git_sha": "e177a1341b14bb118d26c4ed35f1f92fe8ea2efd",
+  "run_id": "44200039968",
+  "html": "2026-11-18-378305ca07cbcf56.html",
+  "markdown": "2026-11-18-378305ca07cbcf56.md",
+  "html_sha256": "378305ca07cbcf5672ce8e04e72c07444ae38cb3e37faeba516bf6fba1e17b71",
+  "markdown_sha256": "8d72ebb5bf97d36ad9e718033acdc9a282499dfbd46dbdff51be27657edbd958",
+  "telegram": {
+    "status": "ok",
+    "documents": 4,
+    "skipped": 0
+  },
+  "ranking_status": "ok",
+  "ranking_issue": "2026-11-16",
+  "prompt_sha256": "91886b4070c05934ec63577a29e03fb4372ca3145178da8963176e2467bf7bdb"
+}
