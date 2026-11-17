@@ -248,5 +248,30 @@
     "message_id": "31849",
     "sha256": "8554dbc66e8caaa22f5eec485f7e3bcdfb29a8e8d2b2d1f1b94f5f9a377a0f14",
     "collected_at": "2026-11-15T21:08:20.697336+00:00"
+  },
+  "wsj:2026-11-16": {
+    "message_id": "31888",
+    "sha256": "945b5f9bce8b59f4c2d144d66c2b86f380f14fe4f0afa04bbe7d0ed42f6e4c28",
+    "collected_at": "2026-11-17T00:32:17.839156+00:00"
+  },
+  "washington-post:2026-11-16": {
+    "message_id": "31895",
+    "sha256": "2f50482c4f8448692a7596f20c21d62f13bdd96ccd22a3c00dbfb910001941f9",
+    "collected_at": "2026-11-17T00:32:35.449889+00:00"
+  },
+  "nytimes:2026-11-16": {
+    "message_id": "31876",
+    "sha256": "37a413d6b67d645f4c13d4a93cdb7d29a163d214d615e29086c7942ff9abf0cd",
+    "collected_at": "2026-11-17T00:34:32.553106+00:00"
+  },
+  "new-yorker:2026-11-23": {
+    "message_id": "31901",
+    "sha256": "8197accdb9675620c75fdd4544162bb982773930c3314464de835e9721e1215b",
+    "collected_at": "2026-11-17T00:36:53.988211+00:00"
+  },
+  "atlantic:2026-12-01": {
+    "message_id": "31643",
+    "sha256": "4b80575c9c06e617c98ea53ad1a1bf677613a930eb5e990480e90fb1fa93d4a2",
+    "collected_at": "2026-11-17T00:37:10.425809+00:00"
   }
 }

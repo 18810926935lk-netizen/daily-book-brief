@@ -68,6 +68,19 @@
       "ocr_low_text_pages_remaining": 12
     },
     {
+      "publication": "The Atlantic",
+      "filename": "The Atlantic_Dec 2026.pdf",
+      "message_id": "31643",
+      "issue_key": "atlantic:2026-12-01",
+      "issue_date": "2026-12-01",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31643",
+      "sha256": "4b80575c9c06e617c98ea53ad1a1bf677613a930eb5e990480e90fb1fa93d4a2",
+      "collected_at": "2026-11-17T00:37:10.425809+00:00",
+      "pages": 116,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Economist",
       "filename": "The Economist (Web Edition)_1411.pdf",
       "message_id": "31770",
@@ -199,6 +212,19 @@
       "ocr_low_text_pages_remaining": 7
     },
     {
+      "publication": "The New York Times",
+      "filename": "NYT International 1611.pdf",
+      "message_id": "31876",
+      "issue_key": "nytimes:2026-11-16",
+      "issue_date": "2026-11-16",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31876",
+      "sha256": "37a413d6b67d645f4c13d4a93cdb7d29a163d214d615e29086c7942ff9abf0cd",
+      "collected_at": "2026-11-17T00:34:32.553106+00:00",
+      "pages": 18,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The New Yorker",
       "filename": "The New Yorker_1611.pdf",
       "message_id": "31634",
@@ -209,6 +235,19 @@
       "sha256": "abffebcce2ffa982f0feaaaf46b19425898fc2b3cbf8ad728454984cbe8f5587",
       "collected_at": "2026-11-11T04:50:18.226000+00:00",
       "pages": 74,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The New Yorker",
+      "filename": "The New Yorker_2311.pdf",
+      "message_id": "31901",
+      "issue_key": "new-yorker:2026-11-23",
+      "issue_date": "2026-11-23",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31901",
+      "sha256": "8197accdb9675620c75fdd4544162bb982773930c3314464de835e9721e1215b",
+      "collected_at": "2026-11-17T00:36:53.988211+00:00",
+      "pages": 76,
       "ocr_low_text_pages_remaining": 0
     },
     {
@@ -274,6 +313,19 @@
       "sha256": "d63195c413e6172fd963e66849a19f668e58eae04e1100583eeca7b57fdc6d5a",
       "collected_at": "2026-11-14T20:45:42.467055+00:00",
       "pages": 56,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - November 16, 2026.pdf",
+      "message_id": "31888",
+      "issue_key": "wsj:2026-11-16",
+      "issue_date": "2026-11-16",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31888",
+      "sha256": "945b5f9bce8b59f4c2d144d66c2b86f380f14fe4f0afa04bbe7d0ed42f6e4c28",
+      "collected_at": "2026-11-17T00:32:17.839156+00:00",
+      "pages": 32,
       "ocr_low_text_pages_remaining": 0
     },
     {
@@ -353,6 +405,19 @@
       "sha256": "8298cf9908d3497b386271a19a5e572fffba6d921b9cb19030383db3441137eb",
       "collected_at": "2026-11-15T21:05:32.706178+00:00",
       "pages": 73,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 16, 2026.pdf",
+      "message_id": "31895",
+      "issue_key": "washington-post:2026-11-16",
+      "issue_date": "2026-11-16",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/31895",
+      "sha256": "2f50482c4f8448692a7596f20c21d62f13bdd96ccd22a3c00dbfb910001941f9",
+      "collected_at": "2026-11-17T00:32:35.449889+00:00",
+      "pages": 44,
       "ocr_low_text_pages_remaining": 0
     }
   ]
