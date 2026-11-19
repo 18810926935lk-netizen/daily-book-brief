@@ -308,5 +308,25 @@
     "message_id": "31950",
     "sha256": "f7ba7502d34b05128b0d8f325ceba46396e267a5b444534fceb2aa2192e7b1e2",
     "collected_at": "2026-11-18T23:02:02.422555+00:00"
+  },
+  "wsj:2026-11-19": {
+    "message_id": "31996",
+    "sha256": "4966804e19dc6ce0aef21e2b640d715124d03d297c293d23be5a17c146c9dcfd",
+    "collected_at": "2026-11-19T23:08:26.617191+00:00"
+  },
+  "washington-post:2026-11-19": {
+    "message_id": "31997",
+    "sha256": "f7dfb21dd2eecf096ef1389d4bb759223baa6cf2aad921f518078ff3572d77eb",
+    "collected_at": "2026-11-19T23:08:41.021135+00:00"
+  },
+  "nytimes:2026-11-19": {
+    "message_id": "31979",
+    "sha256": "cb4cdad7a63c6de7b105d0beb9fa1f2db9e16502140bfd920648aa4380ed2c88",
+    "collected_at": "2026-11-19T23:09:28.701214+00:00"
+  },
+  "guardian:2026-11-19": {
+    "message_id": "31989",
+    "sha256": "aabc808039c66a8ca4f823dfa427c31356e4792c9ecc7e70c16340a054015c40",
+    "collected_at": "2026-11-19T23:09:42.956662+00:00"
   }
 }
