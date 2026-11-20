@@ -94,6 +94,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Economist",
+      "filename": "The Economist (Web Edition)_2111.pdf",
+      "message_id": "32022",
+      "issue_key": "economist:2026-11-21",
+      "issue_date": "2026-11-21",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32022",
+      "sha256": "93668f89393f8b35da2a2f096305e4a0a7ab6440bf78a5d640624ec8bb0c0a40",
+      "collected_at": "2026-11-20T22:37:58.780677+00:00",
+      "pages": 367,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Guardian",
       "filename": null,
       "message_id": "31615",
@@ -199,6 +212,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Guardian",
+      "filename": "The Guardian Weekly_2011.pdf",
+      "message_id": "32015",
+      "issue_key": "guardian:2026-11-20",
+      "issue_date": "2026-11-20",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32015",
+      "sha256": "8ae199855869eba89e7174e735be341a31efaa3875f94084423f6b32a6b405fe",
+      "collected_at": "2026-11-20T22:38:13.354427+00:00",
+      "pages": 64,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The New York Times",
       "filename": "NYT International 1111.pdf",
       "message_id": "31677",
@@ -300,6 +326,19 @@
       "sha256": "cb4cdad7a63c6de7b105d0beb9fa1f2db9e16502140bfd920648aa4380ed2c88",
       "collected_at": "2026-11-19T23:09:28.701214+00:00",
       "pages": 20,
+      "ocr_low_text_pages_remaining": 1
+    },
+    {
+      "publication": "The New York Times",
+      "filename": "NYT International 2011.pdf",
+      "message_id": "32024",
+      "issue_key": "nytimes:2026-11-20",
+      "issue_date": "2026-11-20",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32024",
+      "sha256": "c715b257909287306266c6121c5ebfffaf6987f006ee8e71fead21fd7165d8d2",
+      "collected_at": "2026-11-20T22:37:46.120487+00:00",
+      "pages": 28,
       "ocr_low_text_pages_remaining": 1
     },
     {
@@ -446,6 +485,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - November 20, 2026.pdf",
+      "message_id": "32041",
+      "issue_key": "wsj:2026-11-20",
+      "issue_date": "2026-11-20",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32041",
+      "sha256": "b7c2e3db5ea98d4c08f386ed6fc76a22bb00673a7a240ad134a3e1ca07281c66",
+      "collected_at": "2026-11-20T22:36:36.104765+00:00",
+      "pages": 41,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Washington Post",
       "filename": null,
       "message_id": "31629",
@@ -561,6 +613,19 @@
       "sha256": "f7dfb21dd2eecf096ef1389d4bb759223baa6cf2aad921f518078ff3572d77eb",
       "collected_at": "2026-11-19T23:08:41.021135+00:00",
       "pages": 56,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 20, 2026.pdf",
+      "message_id": "32047",
+      "issue_key": "washington-post:2026-11-20",
+      "issue_date": "2026-11-20",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32047",
+      "sha256": "d2475bf7fc87855991aab1b63bf3641bd11bfd8a2af8d7f12b86781954985d4a",
+      "collected_at": "2026-11-20T22:36:50.238340+00:00",
+      "pages": 55,
       "ocr_low_text_pages_remaining": 0
     }
   ]
