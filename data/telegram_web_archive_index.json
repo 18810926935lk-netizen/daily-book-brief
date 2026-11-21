@@ -627,6 +627,19 @@
       "collected_at": "2026-11-20T22:36:50.238340+00:00",
       "pages": 55,
       "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 21, 2026.pdf",
+      "message_id": "32091",
+      "issue_key": "washington-post:2026-11-21",
+      "issue_date": "2026-11-21",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32091",
+      "sha256": "8dcbf11b21af4fd1f41fcc43dd86d30115f3f35af9c912177ea9638303ebff1f",
+      "collected_at": "2026-11-21T21:41:51.002916+00:00",
+      "pages": 40,
+      "ocr_low_text_pages_remaining": 0
     }
   ]
 }
