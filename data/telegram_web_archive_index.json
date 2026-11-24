@@ -225,6 +225,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Guardian",
+      "filename": "The Guardian UK_2311.pdf",
+      "message_id": "32130",
+      "issue_key": "guardian:2026-11-23",
+      "issue_date": "2026-11-23",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32130",
+      "sha256": "0c36bd0b288c78543c2a9d05299ff66e63fbadc535fb7962d484265656aa1970",
+      "collected_at": "2026-11-24T03:07:12.125005+00:00",
+      "pages": 64,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The New York Times",
       "filename": "NYT International 1111.pdf",
       "message_id": "31677",
@@ -355,6 +368,19 @@
       "ocr_low_text_pages_remaining": 10
     },
     {
+      "publication": "The New York Times",
+      "filename": "NYT International 2411.pdf",
+      "message_id": "32161",
+      "issue_key": "nytimes:2026-11-24",
+      "issue_date": "2026-11-24",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32161",
+      "sha256": "27d8a4a806259bd74a5ae484579bdcef154aeffcd93d20b61b6e6f8d6f5ea8dc",
+      "collected_at": "2026-11-24T03:06:57.241161+00:00",
+      "pages": 28,
+      "ocr_low_text_pages_remaining": 2
+    },
+    {
       "publication": "The New Yorker",
       "filename": "The New Yorker_1611.pdf",
       "message_id": "31634",
@@ -378,6 +404,19 @@
       "sha256": "8197accdb9675620c75fdd4544162bb982773930c3314464de835e9721e1215b",
       "collected_at": "2026-11-17T00:36:53.988211+00:00",
       "pages": 76,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The New Yorker",
+      "filename": "The New Yorker_3011.pdf",
+      "message_id": "32145",
+      "issue_key": "new-yorker:2026-11-30",
+      "issue_date": "2026-11-30",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32145",
+      "sha256": "add74452e5df754cf969fce6c4f7dcb4c77e51556777ede443b0d1d4b84bb1f1",
+      "collected_at": "2026-11-24T03:07:26.718222+00:00",
+      "pages": 90,
       "ocr_low_text_pages_remaining": 0
     },
     {
@@ -508,6 +547,19 @@
       "sha256": "b7c2e3db5ea98d4c08f386ed6fc76a22bb00673a7a240ad134a3e1ca07281c66",
       "collected_at": "2026-11-20T22:36:36.104765+00:00",
       "pages": 41,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - 23 November 2026.pdf",
+      "message_id": "32137",
+      "issue_key": "wsj:2026-11-23",
+      "issue_date": "2026-11-23",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32137",
+      "sha256": "8eda22f06d95c6396a9dd9a0d2cf161a708ff18272794d866cae133c1c358800",
+      "collected_at": "2026-11-24T03:05:47.004904+00:00",
+      "pages": 38,
       "ocr_low_text_pages_remaining": 0
     },
     {
@@ -665,6 +717,19 @@
       "sha256": "7ca81f14c132cf23678979b689c220610d8a96e7f9240af4aa1eae95bda7128f",
       "collected_at": "2026-11-22T21:49:29.955017+00:00",
       "pages": 76,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 23, 2026.pdf",
+      "message_id": "32139",
+      "issue_key": "washington-post:2026-11-23",
+      "issue_date": "2026-11-23",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32139",
+      "sha256": "80c049f019e914f0b611338379961776cde3c1dba12fc7000a1537e03afe0e75",
+      "collected_at": "2026-11-24T03:06:03.257627+00:00",
+      "pages": 44,
       "ocr_low_text_pages_remaining": 0
     }
   ]
