@@ -4,6 +4,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import urlencode, urlparse
 
 import feedparser
 import requests
@@ -26,6 +27,25 @@ FEEDS = [
     ('DW Culture', '跨文化', 'https://rss.dw.com/rdf/rss-en-cul'),
     ('Le Monde Livres', '法语图书', 'https://www.lemonde.fr/livres/rss_full.xml'),
 ]
+
+# Dedicated university reading recommendation coverage. Official feeds are
+# supplemented by targeted discovery; unresolved aggregator links are leads,
+# never evidence that a recommendation was made.
+UNIVERSITY_FEEDS = [
+    ('Harvard Gazette', '大学荐书', 'https://news.harvard.edu/gazette/feed'),
+    ('Yale News', '大学荐书', 'https://news.yale.edu/news-rss'),
+    ('MIT News (荐书专项)', '大学荐书', 'https://news.mit.edu/rss/feed'),
+]
+UNIVERSITY_DOMAINS = [
+    ('美国东北部', ['harvard.edu', 'yale.edu', 'mit.edu', 'princeton.edu', 'columbia.edu', 'upenn.edu']),
+    ('美国其他地区', ['stanford.edu', 'berkeley.edu', 'uchicago.edu', 'cornell.edu', 'duke.edu', 'northwestern.edu']),
+    ('英国', ['ox.ac.uk', 'cam.ac.uk', 'imperial.ac.uk', 'ucl.ac.uk', 'lse.ac.uk', 'ed.ac.uk']),
+    ('加拿大', ['utoronto.ca', 'ubc.ca', 'mcgill.ca']),
+    ('欧洲', ['ethz.ch', 'epfl.ch', 'sorbonne-universite.fr', 'tum.de', 'uni-heidelberg.de']),
+    ('澳洲', ['unimelb.edu.au', 'sydney.edu.au', 'anu.edu.au', 'unsw.edu.au']),
+    ('亚洲', ['nus.edu.sg', 'ntu.edu.sg', 'hku.hk', 'cuhk.edu.hk', 'u-tokyo.ac.jp', 'kyoto-u.ac.jp']),
+]
+BOOK_SIGNAL = re.compile(r'\b(?:books?|reading list|recommended readings?|what to read|reads|book picks)\b|荐书|書評|おすすめの本|推薦図書|les livres|les lectures|buchtipps|lesetipps', re.I)
 
 
 def fetch(url):
@@ -90,7 +110,7 @@ def collect_rankings():
     return {'checked_at': datetime.now(CST).isoformat(), 'attempts': attempts, 'chart': chart}
 
 
-def collect_feed(spec):
+def collect_feed(spec, book_only=False):
     name, topic, url = spec
     result = {'name': name, 'topic': topic, 'url': url, 'items': []}
     now = datetime.now(timezone.utc)
@@ -106,6 +126,8 @@ def collect_feed(spec):
             if not now - timedelta(days=7) <= date <= now:
                 continue
             excerpt = BeautifulSoup(entry.get('summary', ''), 'html.parser').get_text(' ', strip=True)
+            if book_only and not BOOK_SIGNAL.search(entry.get('title', '') + ' ' + excerpt):
+                continue
             item = {'title': entry.get('title', ''), 'url': entry.link, 'date': date.isoformat(),
                     'date_basis': 'published' if entry.get('published_parsed') else 'updated_only_not_first_publication',
                     'excerpt': excerpt[:1500], 'evidence': 'feed_excerpt_only'}
@@ -122,9 +144,67 @@ def collect_feed(spec):
             except requests.RequestException:
                 item['article_access'] = 'unavailable'
             result['items'].append(item)
-            if len(result['items']) >= 3:
+            if len(result['items']) >= (8 if book_only else 3):
                 break
         result['status'] = 'ok'
+    except (requests.RequestException, ValueError) as e:
+        result.update(status='unavailable', reason=type(e).__name__)
+    return result
+
+def collect_university_search(group):
+    region, domains = group
+    sites = ' OR '.join('site:' + d for d in domains)
+    terms = '("reading list" OR "book recommendations" OR "books to read" OR "faculty picks" OR "recommended books" OR "professors recommend" OR "book picks" OR "winter reading" OR "summer reading")'
+    if region == '欧洲':
+        terms += ' OR ("conseils de lecture" OR "Buchtipps" OR "Lesetipps")'
+    if region == '亚洲':
+        terms += ' OR ("荐书" OR "推薦図書" OR "おすすめの本")'
+    query = '(' + sites + ') (' + terms + ') when:7d'
+    url = 'https://news.google.com/rss/search?' + urlencode({'q': query, 'hl': 'en-US', 'gl': 'US', 'ceid': 'US:en'})
+    result = {'name': '大学荐书专项检索 · ' + region, 'topic': '大学荐书', 'url': url,
+              'domains': domains, 'items': [], 'unverified_leads': [], 'status': 'ok'}
+    now = datetime.now(timezone.utc)
+    try:
+        feed = feedparser.parse(fetch(url))
+        if feed.bozo and not feed.entries:
+            raise ValueError('invalid_feed')
+        for entry in feed.entries[:12]:
+            dt = entry.get('published_parsed')
+            if not dt or not entry.get('link'):
+                continue
+            date = datetime(*dt[:6], tzinfo=timezone.utc)
+            if not now - timedelta(days=7) <= date <= now:
+                continue
+            title = entry.get('title', '')
+            link = entry.link
+            def official(candidate):
+                host = urlparse(candidate).hostname or ''
+                return urlparse(candidate).scheme == 'https' and any(host == d or host.endswith('.' + d) for d in domains)
+            if not official(link):
+                summary = BeautifulSoup(entry.get('summary', ''), 'html.parser')
+                link = next((a.get('href') for a in summary.select('a[href]') if official(a.get('href', '')) and urlparse(a.get('href', '')).path not in ('', '/')), link)
+            if not official(link):
+                # Google News URLs frequently remain opaque. Do not treat
+                # discovery-only metadata as an original university source.
+                result['unverified_leads'].append({'title': title, 'date': date.isoformat(), 'url': link,
+                                                   'reason': '聚合链接未能确认为学校原文；仅供核查，不作为已证实推荐'})
+                continue
+            excerpt = BeautifulSoup(entry.get('summary', ''), 'html.parser').get_text(' ', strip=True)
+            try:
+                article = BeautifulSoup(fetch(link), 'html.parser')
+                body = article.select_one('article') or article.select_one('main')
+                if body:
+                    for el in body.select('script,style,nav,aside,footer,form'):
+                        el.decompose()
+                    text = '\\n'.join(p.get_text(' ', strip=True) for p in body.select('p,li') if p.get_text(' ', strip=True))
+                    if len(text) > 200:
+                        result['items'].append({'title': title, 'url': link, 'date': date.isoformat(),
+                                                'date_basis': 'aggregator_date_verify_original',
+                                                'excerpt': text[:14000], 'evidence': 'article_partial_text'})
+                        continue
+            except requests.RequestException:
+                pass
+            result['unverified_leads'].append({'title': title, 'date': date.isoformat(), 'url': link, 'reason': '原文内容未核实'})
     except (requests.RequestException, ValueError) as e:
         result.update(status='unavailable', reason=type(e).__name__)
     return result
@@ -135,7 +215,9 @@ def main():
     rankings = collect_rankings()
     (BASE / 'data/rankings.json').write_text(json.dumps(rankings, ensure_ascii=False, indent=2), encoding='utf-8')
     with ThreadPoolExecutor(max_workers=6) as pool:
-        sources = list(pool.map(collect_feed, FEEDS))
+        university_feeds = list(pool.map(lambda spec: collect_feed(spec, book_only=True), UNIVERSITY_FEEDS))
+        university_search = list(pool.map(collect_university_search, UNIVERSITY_DOMAINS))
+        sources = university_feeds + university_search + list(pool.map(collect_feed, FEEDS))
     (BASE / 'data/editorial.json').write_text(json.dumps({'checked_at': datetime.now(CST).isoformat(), 'sources': sources}, ensure_ascii=False), encoding='utf-8')
     print('EDITORIAL:', [(s['name'], s['status'], len(s['items'])) for s in sources])
     print('RANKINGS:', rankings['chart']['status'], len(rankings['chart']['books']))
