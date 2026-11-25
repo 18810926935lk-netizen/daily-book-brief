@@ -393,5 +393,20 @@
     "message_id": "32145",
     "sha256": "add74452e5df754cf969fce6c4f7dcb4c77e51556777ede443b0d1d4b84bb1f1",
     "collected_at": "2026-11-24T03:07:26.718222+00:00"
+  },
+  "wsj:2026-11-24": {
+    "message_id": "32177",
+    "sha256": "0f697a836ed7e852b9ada334bf489e1809ae1ed59b969cf2034543073ed525b6",
+    "collected_at": "2026-11-25T00:47:58.133094+00:00"
+  },
+  "washington-post:2026-11-24": {
+    "message_id": "32180",
+    "sha256": "475f1f56823b267697aed9fec5b894c66177970adf048e8707bb9d05a1457481",
+    "collected_at": "2026-11-25T00:48:13.451894+00:00"
+  },
+  "guardian:2026-11-24": {
+    "message_id": "32172",
+    "sha256": "e9a3e2baf81569e807a1f360018911779a81c5c15dffb7fc06cf20890bd9fad1",
+    "collected_at": "2026-11-25T00:49:18.998509+00:00"
   }
 }

@@ -238,6 +238,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Guardian",
+      "filename": "The Guardian UK_2411.pdf",
+      "message_id": "32172",
+      "issue_key": "guardian:2026-11-24",
+      "issue_date": "2026-11-24",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32172",
+      "sha256": "e9a3e2baf81569e807a1f360018911779a81c5c15dffb7fc06cf20890bd9fad1",
+      "collected_at": "2026-11-25T00:49:18.998509+00:00",
+      "pages": 64,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The New York Times",
       "filename": "NYT International 1111.pdf",
       "message_id": "31677",
@@ -563,6 +576,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Wall Street Journal",
+      "filename": "The Wall Street Journal - November 24, 2026.pdf",
+      "message_id": "32177",
+      "issue_key": "wsj:2026-11-24",
+      "issue_date": "2026-11-24",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32177",
+      "sha256": "0f697a836ed7e852b9ada334bf489e1809ae1ed59b969cf2034543073ed525b6",
+      "collected_at": "2026-11-25T00:47:58.133094+00:00",
+      "pages": 30,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Washington Post",
       "filename": null,
       "message_id": "31629",
@@ -730,6 +756,19 @@
       "sha256": "80c049f019e914f0b611338379961776cde3c1dba12fc7000a1537e03afe0e75",
       "collected_at": "2026-11-24T03:06:03.257627+00:00",
       "pages": 44,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
+      "publication": "The Washington Post",
+      "filename": "The Washington Post - November 24, 2026.pdf",
+      "message_id": "32180",
+      "issue_key": "washington-post:2026-11-24",
+      "issue_date": "2026-11-24",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32180",
+      "sha256": "475f1f56823b267697aed9fec5b894c66177970adf048e8707bb9d05a1457481",
+      "collected_at": "2026-11-25T00:48:13.451894+00:00",
+      "pages": 40,
       "ocr_low_text_pages_remaining": 0
     }
   ]
