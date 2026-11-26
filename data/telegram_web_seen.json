@@ -408,5 +408,10 @@
     "message_id": "32172",
     "sha256": "e9a3e2baf81569e807a1f360018911779a81c5c15dffb7fc06cf20890bd9fad1",
     "collected_at": "2026-11-25T00:49:18.998509+00:00"
+  },
+  "nytimes:2026-11-25": {
+    "message_id": "32229",
+    "sha256": "4f318edceda3e5980bf27933ea42329b6611c710a738ef5be70ed41b59f51960",
+    "collected_at": "2026-11-26T00:25:32.298095+00:00"
   }
 }

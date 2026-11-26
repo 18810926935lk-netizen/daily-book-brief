@@ -394,6 +394,19 @@
       "ocr_low_text_pages_remaining": 2
     },
     {
+      "publication": "The New York Times",
+      "filename": "The-New-York-Times-International-25-11-2026.pdf",
+      "message_id": "32229",
+      "issue_key": "nytimes:2026-11-25",
+      "issue_date": "2026-11-25",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32229",
+      "sha256": "4f318edceda3e5980bf27933ea42329b6611c710a738ef5be70ed41b59f51960",
+      "collected_at": "2026-11-26T00:25:32.298095+00:00",
+      "pages": 20,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The New Yorker",
       "filename": "The New Yorker_1611.pdf",
       "message_id": "31634",
