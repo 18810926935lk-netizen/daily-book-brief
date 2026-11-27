@@ -446,6 +446,19 @@
       "ocr_low_text_pages_remaining": 0
     },
     {
+      "publication": "The Times Literary Supplement",
+      "filename": "The TLS - No. 6418, 13 November 2026.pdf",
+      "message_id": "32237",
+      "issue_key": "tls:2026-11-13",
+      "issue_date": "2026-11-13",
+      "issue_date_basis": "filename_candidate",
+      "source": "https://t.me/demagazinesharing/32237",
+      "sha256": "2cd15fa95a1fa0f2088761aa14e2b28b34afbcfc87b6763fd79f899950a38dbb",
+      "collected_at": "2026-11-27T00:38:23.141722+00:00",
+      "pages": 48,
+      "ocr_low_text_pages_remaining": 0
+    },
+    {
       "publication": "The Wall Street Journal",
       "filename": "The Wall Street Journal - November 10, 2026.pdf",
       "message_id": "31670",
