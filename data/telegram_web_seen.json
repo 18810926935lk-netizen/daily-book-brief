@@ -418,5 +418,15 @@
     "message_id": "32237",
     "sha256": "2cd15fa95a1fa0f2088761aa14e2b28b34afbcfc87b6763fd79f899950a38dbb",
     "collected_at": "2026-11-27T00:38:23.141722+00:00"
+  },
+  "guardian:2026-11-27": {
+    "message_id": "32285",
+    "sha256": "d2dc60348002dbb3d4ded0de385bed3333c6448f4585c698dd79b9e547e19507",
+    "collected_at": "2026-11-28T00:06:41.694234+00:00"
+  },
+  "literary-review:2026-12-01": {
+    "message_id": "32305",
+    "sha256": "a624c70b29ed897d8499e64aaaf3d36ae96debe763adc0a905796faffc0dbdbc",
+    "collected_at": "2026-11-28T00:06:54.446978+00:00"
   }
 }
